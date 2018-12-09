@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <br>
+    <div class="col-md-3 panel panel-info" id="myScrollspy" style="padding-left: 0px; padding-right: 0px;">
+      <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="205" align="center">
+        <li>
+          <a style="color: #ffffff; background-color: #020531;">Faculty Dashboard</a>
+        </li>
+        <li>
+          <a href="/encode1-grades">Encode Student Grades</a>
+        </li>
+        <li>
+          <a href="/viewencoded-grades">View Encoded Grades</a>
+        </li>
+        <% if(loginUser.publisher){ %>
+        <li>
+          <a href="/managepubs">Manage Publications</a>
+        </li>
+        <% } %>
+        <li>
+          <a href="/edit-profile">Account Settings</a>
+        </li>
+        <li>
+          <br>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

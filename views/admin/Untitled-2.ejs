@@ -1,0 +1,161 @@
+<!-- ganto lagi simula -->
+
+<% layout("layout") -%>
+  <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+    <div class="col-lg-12">
+      <% include ../partials/adminpanel %>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="container">
+      <div class="panel panel-info  col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 80px; height:460px;">
+        <!-- heading ng panel -->
+        <div class="panel-heading" style="color: #ffffff;">Heading</div>
+
+        <!-- dito ung laman ng ejs ung form  -->
+
+      </div>
+    </div>
+
+
+
+
+
+    <!-- example kung may table -->
+
+    <% layout("layout") -%>
+      <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+        <div class="col-lg-12">
+          <% include ../partials/adminpanel %>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="container">
+          <div class="panel panel-info  col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 80px; height:460px;">
+            <!-- heading ng panel -->
+            <div class="panel-heading" style="color: #ffffff;">Heading</div>
+
+            <!-- dito ung laman ng ejs ung form  -->
+
+
+            <!-- eto ung table -->
+            <div class="table-responsive">
+              <div style="overflow-y: scroll; height:350px; ">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th style="color: #ffffff; background-color: #020531;">Subject </th>
+                      <th style="color: #ffffff; background-color: #020531;">1st Grading</th>
+                      <th style="color: #ffffff; background-color: #020531;">2nd Grading</th>
+                      <th style="color: #ffffff; background-color: #020531;">3rd Grading</th>
+
+                      <th style="color: #ffffff; background-color: #020531;">4th Grading</th>
+
+                      <th style="color: #ffffff; background-color: #020531;">Final Grade</th>
+
+                      <th style="color: #ffffff; background-color: #020531;">Remark</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Science</td>
+                      <td>75</td>
+                      <td>75</td>
+                      <td>75</td>
+                      <td>75</td>
+                      <td>75</td>
+                      <td>Passed!</td>
+                    </tr>
+                    <tr>
+                      <td>Math</td>
+                      <td>77</td>
+                      <td>77</td>
+                      <td>77</td>
+                      <td>77</td>
+                      <td>77</td>
+                      <td>Passed!</td>
+                    </tr>
+                    <tr>
+                      <td>PE</td>
+                      <td>85</td>
+                      <td>85</td>
+                      <td>85</td>
+                      <td>85</td>
+                      <td>85</td>
+                      <td>Passed!</td>
+                    </tr>
+                    <tr>
+                      <td>Recess</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>Passed!</td>
+                    </tr>
+                    <tr>
+                      <td>Kain</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>Passed!</td>
+                    </tr>
+                    <tr>
+                      <td>Tulog</td>
+                      <td>99</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>Passed!</td>
+                    </tr>
+                    <tr>
+                      <td>PE</td>
+                      <td>85</td>
+                      <td>85</td>
+                      <td>85</td>
+                      <td>85</td>
+                      <td>85</td>
+                      <td>Passed!</td>
+                    </tr>
+                    <tr>
+                      <td>Recess</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>Passed!</td>
+                    </tr>
+                    <tr>
+                      <td>Kain</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>Passed!</td>
+                    </tr>
+                    <tr>
+                      <td>Tulog</td>
+                      <td>99</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>95</td>
+                      <td>Passed!</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- tapos para makita mo punta ka sa routes main.js -->
+      <!-- sample eto  -->
+      <!-- ung router.get('/activities' ayan ung link bali pag localhost:3000/activities tas eto ung kukunin nyang file main/activities from { res.render('main/activities') -->
+      <!-- router.get('/activities', function(req, res, next) { res.render('main/activities'); }); -->

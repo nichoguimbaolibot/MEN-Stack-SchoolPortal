@@ -1,0 +1,147 @@
+<% if(message && message.length >0){ %>
+  <div class="alert alert-warning alert-dismissible" style="position: absolute;
+	top: 0px;
+	right: 1%;
+	height: 100px;
+	width: 400px;
+	z-index: 99;">
+    <button type="button" id="btn" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+
+    </button>
+    <%= message %>
+  </div>
+  <% } %>
+    <% layout("layout") -%>
+      <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+        <div class="col-lg-12">
+          <% include ../partials/adminpanel %>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="container">
+          <div class="panel panel-info  col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 80px; height:500px;">
+
+            <div class="panel-heading" style="color: #ffffff;">View Student Grades</div>
+            <br>
+            <div clas="form-group" style="margin-left: 1%">
+              <form action="/studentlist/<%= studentId %>" method="GET">
+                <select name="academicYear" class="btn btn-info">
+                  <option>Choose a year...</option>
+                  <% curriculums.forEach(function(curriculum){ %>
+                    <option value="<%= curriculum.academicYear %>">
+                      <%= curriculum.academicYear %>
+                    </option>
+                    <% }); %>
+                </select>
+                <button class="btn btn-info">Find</button>
+                <form>
+            </div>
+
+
+            <!-- <div class=" form-group ">
+          <br>
+          <label for="usr " style="margin-left: 5px; ">Academic Year:</label>
+          <div class="container ">
+            <div class="dropdown " style="margin-top:5px; margin-left: -10px; ">
+              <button style="border-radius: 5px; " class="dropdown-toggle " type="button " data-toggle="dropdown ">--Please Select--
+                <span class="caret "></span>
+              </button>
+              <ul class="dropdown-menu ">
+                <li>
+                  <a href="# ">1</a>
+                </li>
+                <li>
+                  <a href="# ">2</a>
+                </li>
+                <li>
+                  <a href="# ">3</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div> -->
+            <br>
+
+
+            <div class="table-responsive">
+              <div style="overflow-y: scroll; height:370px; ">
+                <table class="table table-striped">
+                  <thead>
+
+                    <tr>
+                      <th style="color: #ffffff; background-color: #020531;">Subject </th>
+                      <% if(curriculum.yrLvl === "grade1"|| curriculum.yrLvl === "grade2" || curriculum.yrLvl === "grade3" || curriculum.yrLvl === "grade4" || curriculum.yrLvl === "grade5" || curriculum.yrLvl === "grade6" || curriculum.yrLvl === "grade7" || curriculum.yrLvl === "grade8" ||curriculum.yrLvl === "grade9" ||curriculum.yrLvl === "grade10"){ %>
+                        <th style="color: #ffffff; background-color: #020531;">1st Grading</th>
+                        <th style="color: #ffffff; background-color: #020531;">2nd Grading</th>
+                        <th style="color: #ffffff; background-color: #020531;">3rd Grading</th>
+                        <th style="color: #ffffff; background-color: #020531;">4th Grading</th>
+                        <th style="color: #ffffff; background-color: #020531;">Final Grade</th>
+                        <th style="color: #ffffff; background-color: #020531;">Remarks</th>
+                        <% }else{ %>
+                          <th style="color: #ffffff; background-color: #020531;">First Semester</th>
+                          <th style="color: #ffffff; background-color: #020531;">Second Semester</th>
+                          <% } %>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% if(curriculum.yrLvl === "grade1"|| curriculum.yrLvl === "grade2" || curriculum.yrLvl === "grade3" || curriculum.yrLvl === "grade4" || curriculum.yrLvl === "grade5" || curriculum.yrLvl === "grade6" || curriculum.yrLvl === "grade7" || curriculum.yrLvl === "grade8" ||curriculum.yrLvl === "grade9" ||curriculum.yrLvl === "grade10"){ %>
+                      <% curriculum.subjects.forEach(function(subject){ %>
+                        <tr>
+                          <td style="text-transform: uppercase; font-weight: bold">
+                            <%= subject.subject %>
+                          </td>
+                          <td>
+                            <%= subject.firstGrading %>
+                          </td>
+                          <td>
+                            <%= subject.secondGrading %>
+                          </td>
+                          <td>
+                            <%= subject.thirdGrading %>
+                          </td>
+                          <td>
+                            <%= subject.fourthGrading %>
+                          </td>
+                          <td>
+                            <% if (subject.fourthGrading > 0) { %>
+                              <%= ((parseFloat(subject.firstGrading)  +  parseFloat(subject.secondGrading) +  parseFloat(subject.thirdGrading) + parseFloat(subject.fourthGrading)) / 4 )%>
+                                <% } %>
+                          </td>
+                          <td>
+                            <% if (subject.fourthGrading > 0) { %>
+                              <% if (((parseFloat(subject.firstGrading)  +  parseFloat(subject.secondGrading) +  parseFloat(subject.thirdGrading) + parseFloat(subject.fourthGrading)) / 4) > 75) { %>
+                                Passed!
+                                <% } else if (((parseFloat(subject.firstGrading)  +  parseFloat(subject.secondGrading) +  parseFloat(subject.thirdGrading) + parseFloat(subject.fourthGrading)) / 4) < 75) { %>
+                                  Failed!
+                                  <% } else { %>
+
+                                    <% } %>
+                                      <% } %>
+                          </td>
+                        </tr>
+                        <% }); %>
+                          <% }else{ %>
+                            <% curriculum.subjects.forEach(function(subject){ %>
+                              <tr>
+                                <td style="text-transform: uppercase; font-weight: bold">
+                                  <%= subject.subject %>
+                                </td>
+                                <td>
+                                  <%= subject.firstSem %>
+                                </td>
+                                <td>
+                                  <%= subject.secondSem %>
+                                </td>
+                              </tr>
+                              <% }); %>
+                                <% } %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>

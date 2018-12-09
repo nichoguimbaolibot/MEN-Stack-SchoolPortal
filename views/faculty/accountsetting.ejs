@@ -1,0 +1,169 @@
+<% if(message && message.length >0){ %>
+    <div class="alert alert-warning alert-dismissible" style= "position: absolute;
+	top: 0px;
+	right: 1%;
+	height: 100px;
+	width: 400px;
+	z-index: 99;">
+        <button type="button" id="btn" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+
+        </button>
+        <%= message %>
+    </div>
+    <% } %>
+<% layout("layout") -%>
+  <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+    <div class="col-lg-12">
+      <% include ../partials/facultypanel %>
+    </div>
+  </div>
+</div>
+<div class="col-sm-6">
+  <div class="container">
+    <div class="panel panel-info col-sm-9" style="padding: 0px; margin-top: 80px;" overflow-x: hidden;>
+      <div class="panel-heading" style="color: #ffffff;">
+
+        Account Settings 2012-105736
+
+      </div>
+      <div class="row">
+        <div class="col-lg-6 cold-md-offset-3">
+          <div class="row">
+            <div class="col-md-3 col-sm-3"></div>
+            <div class="col-md-6 col-sm-6 text-center">
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4 " style="margin-top: 20px;">
+
+                <!-- <div class="form-group">
+                  <label for="name">ID No:</label>
+                  <select id="userNumber" class="form-control" name="idNum">
+                    <option>
+
+                    </option>
+                  </select>
+                </div> -->
+                <div class="form-group">
+                  <label for="name">First Name:</label>
+                  <input class="form-control" type="text" name="firstName" placeholder="First Name">
+                </div>
+                <div class="form-group">
+                  <label for="name">Middle Name:</label>
+                  <input class="form-control" type="text" name="middleName" placeholder="Middle Name">
+                </div>
+                <div class="form-group">
+                  <label for="name">Last Name:</label>
+                  <input class="form-control" type="text" name="lastName" placeholder="Last Name">
+                </div>
+                <div class="form-group">
+                  <label for="name">Age:</label>
+                  <input class="form-control" type="number" min="0" name="age" placeholder="Your Age">
+                </div>
+                <label>Birthdate: </label>
+                <div class="form-group">
+                  <select class="btn btn-default" name="year" id="year">
+                  </select>
+                  <select class="btn btn-default" name="month" id="month">
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                  </select>
+                  <select class="btn btn-default" name="day" id="day">
+
+                  </select>
+                </div>
+
+                <div class="form-group" >
+                    <label for="name">Address:</label>
+                    <input class="form-control" type="text" name="address" placeholder="Address">
+                  </div>
+
+              </div>
+              <div class="col-md-4">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="form-group" style="margin-top: -100px">
+                  <label for="name">Email:</label>
+                  <input class="form-control" type="email" name="email" placeholder="abc123@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="name">Old Password:</label>
+                    <input class="form-control" type="password" name="Old password" placeholder="Old Password">
+                  </div>
+                <div class="form-group">
+                  <label for="name">Password:</label>
+                  <input class="form-control" type="password" name="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <label for="confirmPassword">Confirm Password: </label>
+                  <input class="form-control" type="password" name="confirmPassword" placeholder="Confirm Password">
+                </div>
+
+                <div class="form-group" style="margin-top:20px">
+                  <label for="">Gender:</label>
+                  <BR>
+                  <label class="radio-inline" style="margin-left: 1%;">
+                    <input type="radio" id="gender" name="gender" value="female">Female
+                  </label>
+                  <label class="radio-inline" style="margin-left: 2%;">
+                    <input type="radio" id="gender" name="gender" value="male">Male
+                  </label>
+                </div>
+
+                <div class="form-group">
+                  <label for="pwd">Contact Number:</label>
+                  <input type="number" min="0" class="form-control" name="contact" id="contact" placeholder="09XXXXXXXX">
+                </div>
+
+              </div>
+              <div id="tableFaculty" style="display:none; text-align:center;" class="col-md-12">
+                <table border="1" cellspacing="2" cellpadding="2">
+                  <thead>
+                    <th>Subject</th>
+                    <th>Year Level</th>
+                    <th>Section</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <input type="text" name="subject" />
+                      </td>
+                      <td>
+                        <input type="text" name="yearLevel" />
+                      </td>
+                      <td>
+                        <input type="text" name="facultySection" />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" style="width:86%; margin-left:5%;">
+        <div class="text-center">
+          <button class="btn btn-success form-control" style="height:4%;font-weight:bold;">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

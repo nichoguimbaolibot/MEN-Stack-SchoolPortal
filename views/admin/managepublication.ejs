@@ -1,0 +1,387 @@
+<% layout("layout") -%>
+  <% if(message && message.length >0){ %>
+    <div class="alert alert-warning alert-dismissible" style="position: absolute;
+top: 0px;
+right: 1%;
+height: 100px;
+width: 400px;
+z-index: 99;">
+      <button type="button" id="btn" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+
+      </button>
+      <%= message %>
+    </div>
+    <% } %>
+      <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+        <div class="col-lg-12">
+          <% if(loginUser.isAdmin && loginUser.superUser){ %>
+            <% include ../partials/adminpanel %>
+              <% } else {%>
+                <% include ../partials/facultypanel %>
+                  <% } %>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="container">
+          <div class="panel panel-info col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 80px; min-height:500px;">
+
+            <div class="panel-heading" style="color: #ffffff;">
+
+              Manage Publication
+
+            </div>
+            <label for="usr" style="margin-left: 5px; margin-top: 15px;">Category:</label>
+            <div class="container">
+              <div class="dropdown" style="margin-top:5px; margin-left: -10px;">
+                <button style="border-radius: 5px;" class="dropdown-toggle" type="button" data-toggle="dropdown">--Please Select--
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <button class="btn btn-default form-control" onClick="postForm()">Post No.</button>
+                    <form id="postForm" action="/managepubs" method="GET">
+                      <input type="hidden" id="postNum" name="sort" />
+                    </form>
+                  </li>
+                  <li>
+                    <button class="btn btn-default form-control" onClick="postPhotoJournal()">PhotoJournal</button>
+                    <form id="postFormPhotoJournal" action="/managepubs" method="GET">
+                      <input type="hidden" value="postPhotoJournal" id="postPhotoJournal" name="photojournal" />
+                    </form>
+                  </li>
+                  <li>
+                    <button class="btn btn-default form-control" onClick="postEditorial()">Editorial</button>
+                    <form id="postFormEditorial" action="/managepubs" method="GET">
+                      <input type="hidden" value="postEditorial" id="postEditorial" name="editorial" />
+                    </form>
+                  </li>
+                  <li>
+                    <button class="btn btn-default form-control" onClick="postStory()">Story</button>
+                    <form id="postFormStory" action="/managepubs" method="GET">
+                      <input type="hidden" value="postStory" id="postStory" name="story" />
+                    </form>
+                  </li>
+                  <li>
+                    <button class="btn btn-default form-control" onClick="postPoem()">Poem</button>
+                    <form id="postFormPoem" action="/managepubs" method="GET">
+                      <input type="hidden" value="postPoem" id="postPoem" name="poem" />
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <br>
+            <div id="reveal">
+              <div class="table-responsive">
+                <div style="overflow-y: scroll; height:350px; ">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th style="color: #ffffff; background-color: #020531;">Post #</th>
+                        <th style="color: #ffffff; background-color: #020531;">Category</th>
+                        <th style="color: #ffffff; background-color: #020531;">Title</th>
+                        <th style="color: #ffffff; background-color: #020531;">Action</th>
+                        <th style="color: #ffffff; background-color: #020531;">Date Submitted</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% if(literaries){ %>
+                        <% literaries.forEach(function(news){ %>
+                          <tr>
+                            <td>
+                              <%= news.litNumber %>
+                            </td>
+                            <td>
+                              <%= news.category %>
+                            </td>
+                            <td>
+                              <%= news.title %>
+                            </td>
+                            <td>
+                              <form id="delete-form" action="/managepubs/<%= news._id %>/edit" method="POST">
+                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#<%= news._id %>">
+                                  <i class="fa fa-edit" aria-hidden="true"></i>
+                                </button>
+                                <!-- Modal -->
+                                <div id="<%= news._id %>" class="modal fade" role="dialog">
+                                  <div class="modal-dialog modal-lg">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Edit Publication</h4>
+                                      </div>
+                                      <div class="modal-body">
+                                        <div class="form-group">
+                                          <label for="usr" style="color:black;">Category:</label>
+                                          <select disabled name="category" class="btn btn-info" id="usr">
+                                            <option selected value="<%= news.category %>">
+                                              <%= news.category %>
+                                            </option>
+                                            <!-- <option value="photojournal">Photo Journal</option> -->
+                                            <option value="editorial">Editorial</option>
+                                          </select>
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="usr">Title:</label>
+                                          <input disabled value="<%= news.title %>" name="title" type="text" class="form-control" id="usr">
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="comment">Content:</label>
+                                          <%- news.content %>
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="comment">Comments:</label>
+                                          <textarea value="<%= news.comments %>" name="comments" class="form-control" rows="5" id="comments">
+                                            <%= news.comments %>
+                                          </textarea>
+                                        </div>
+                                      </div>
+                                      <div class="modal-body" style="display: none">
+                                        <div class="form-group">
+                                          <label for="usr" style="color:black;">Category:</label>
+                                          <select name="category" class="btn btn-info" id="usr">
+                                            <option selected value="<%= news.category %>">
+                                              <%= news.category %>
+                                            </option>
+                                            <!-- <option value="photojournal">Photo Journal</option> -->
+                                            <option value="editorial">Editorial</option>
+                                          </select>
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="usr">Title:</label>
+                                          <input value="<%= news.title %>" name="title" type="text" class="form-control" id="usr">
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="comment">Content:</label>
+                                          <textarea value="<%= news.content %>" name="content" class="form-control" rows="5" id="comment">
+                                            <%= news.content %>
+                                          </textarea>
+                                        </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button class="btn btn-default">UPDATE</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                            </td>
+                            <td>
+                              <%= moment(news.publishDate).format("LL") %>
+                            </td>
+                          </tr>
+                          <% }); %>
+                            <% } %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div id="accept" hidden="true">
+              <div class="table-responsive">
+                <div style="overflow-y: scroll; height:350px; ">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th style="color: #ffffff; background-color: #020531;"> </th>
+                        <th style="color: #ffffff; background-color: #020531;">Post #</th>
+                        <th style="color: #ffffff; background-color: #020531;">Category</th>
+                        <th style="color: #ffffff; background-color: #020531;">Title</th>
+                        <th style="color: #ffffff; background-color: #020531;">Date Submitted</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <form id="acceptPost" action="/managepubs/accept" method="POST">
+                        <% if(literaries){ %>
+                          <% literaries.forEach(function(news){ %>
+                            <tr>
+                              <td>
+                                <input type="checkbox" name="uniqueId" value="<%= news._id %>" />
+                              </td>
+                              <td>
+                                <%= news.litNumber %>
+                              </td>
+                              <td>
+                                <%= news.category %>
+                              </td>
+                              <td>
+                                <%= news.title %>
+                              </td>
+                              <td>
+                                <%= moment(news.publishDate).format("LL") %>
+                              </td>
+                            </tr>
+                            <% }); %>
+                              <% } %>
+                      </form>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div hidden="true" id="deleting">
+              <div class="table-responsive">
+                <div style="overflow-y: scroll; height:350px; ">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th style="color: #ffffff; background-color: #020531;"> </th>
+                        <th style="color: #ffffff; background-color: #020531;">Post #</th>
+                        <th style="color: #ffffff; background-color: #020531;">Category</th>
+                        <th style="color: #ffffff; background-color: #020531;">Title</th>
+                        <th style="color: #ffffff; background-color: #020531;">Date Submitted</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <form id="deletePost" action="/managepubs/delete" method="POST">
+                        <% if(literaries){ %>
+                          <% literaries.forEach(function(news){ %>
+                            <% if(news.archive == false || news.archive == "false"){ %>
+                              <tr>
+                                <td>
+                                  <input type="checkbox" name="uniqueId" value="<%= news._id %>" />
+                                </td>
+                                <td>
+                                  <%= news.litNumber %>
+                                </td>
+                                <td>
+                                  <%= news.category %>
+                                </td>
+                                <td>
+                                  <%= news.title %>
+                                </td>
+                                <td>
+                                  <%= moment(news.publishDate).format("LL") %>
+                                </td>
+                              </tr>
+                              <% } %>
+                                <% }); %>
+                                  <% } %>
+                      </form>
+                    </tbody>
+                  </table>
+
+
+                </div>
+
+              </div>
+            </div>
+            <div style="float: right;padding:10px">
+              <% if(literaries.length > 0){ %>
+                <button style="background-color: #5cb85c;border:0;color: #ffffff; width: 100px; height: 35px;border-radius: 10px;" id="acceptPublication"
+                  onclick="acceptPublication()">ACCEPT</button>
+                <% }else{ %>
+                  <button style="background-color: #5cb85c;border:0;color: #ffffff; width: 100px; height: 35px;border-radius: 10px;" id="acceptPublication"
+                    onclick="acceptPublication()" disabled>ACCEPT</button>
+                  <% } %>
+                    <button style="background-color: #5cb85c;border:0;color: #ffffff;width: 100px; height: 35px; border-radius: 10px;" id="confirmPublication"
+                      hidden="true" onclick="confirmPublication()">ACCEPT</button>
+                    <button style="background-color: #5cb85c;border:0;color: #ffffff; width: 100px; height: 35px;border-radius: 10px;" id="cancelPublication"
+                      hidden="true" onclick="cancelAccept()">CANCEL</button>
+                    <% if(literaries.length > 0){ %>
+                      <button style="background-color: #5cb85c;border:0;color: #ffffff; width: 100px; height: 35px;border-radius: 10px;" id="deletePublication"
+                        onclick="deletePublication()">DELETE</button>
+                      <% }else{ %>
+                        <button style="background-color: #5cb85c;border:0;color: #ffffff; width: 100px; height: 35px;border-radius: 10px;" id="deletePublication"
+                          onclick="deletePublication()" disabled>DELETE</button>
+                        <% } %>
+                          <button style="background-color: #5cb85c;border:0; color: #ffffff;width: 100px; height: 35px;border-radius: 10px;" id="deleteConfirm"
+                            hidden="true" onclick="deleteConfirm()">DELETE</button>
+                          <button style="background-color: #5cb85c;border:0; color: #ffffff;width: 100px; height: 35px; border-radius: 10px;" id="deleteCancel"
+                            hidden="true" onclick="deleteCancel()">CANCEL</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- //modal -->
+      </div>
+      <script>
+        function acceptPublication() {
+          $("#reveal").attr("hidden", true);
+          $("#acceptPublication").attr("hidden", true);
+          $("#accept").removeAttr("hidden");
+          $("#confirmPublication").removeAttr("hidden");
+          $("#cancelPublication").removeAttr("hidden");
+          $("#deletePublication").attr("hidden", true);
+
+        }
+
+        function confirmPublication() {
+          $("#acceptPost").submit();
+        }
+
+        function cancelAccept() {
+          $("#reveal").removeAttr("hidden");
+          $("#accept").attr("hidden", true);
+          $("#acceptPublication").removeAttr("hidden");
+          $("#confirmPublication").attr("hidden", true);
+          $("#cancelPublication").attr("hidden", true);
+          $("#deletePublication").removeAttr("hidden");
+        }
+
+        function deletePublication() {
+          $("#reveal").attr("hidden", true);
+          $("#deleting").removeAttr("hidden");
+          $("#acceptPublication").attr("hidden", true);
+          $("#deletePublication").attr("hidden", true);
+          $("#deleteConfirm").removeAttr("hidden");
+          $("#deleteCancel").removeAttr("hidden");
+
+        }
+
+        function deleteConfirm() {
+          $("#deletePost").submit();
+        }
+
+        function deleteCancel() {
+          $("#reveal").removeAttr("hidden");
+          $("#deleting").attr("hidden", true);
+          $("#acceptPublication").removeAttr("hidden");
+          $("#deletePublication").removeAttr("hidden");
+          $("#deleteConfirm").attr("hidden", true);
+          $("#deleteCancel").attr("hidden", true);
+        }
+      </script>
+
+      <script>
+        function postForm() {
+          var postNum = document.getElementById("postNum");
+          var postNumVal = (postNum.value = "postNumber");
+          console.log(postNumVal);
+          $("#postForm").submit();
+        }
+
+        function postPhotoJournal() {
+          var postPhotoJournal = document.getElementById("postPhotoJournal");
+          var postNumVal = (postNum.value = "postPhotoJournal");
+          console.log(postNumVal);
+          $("#postFormPhotoJournal").submit();
+        }
+
+        function postEditorial() {
+          var postCategory = document.getElementById("postEditorial");
+          var postNumVal = (postNum.value = "postEditorial");
+          console.log(postNumVal);
+          $("#postFormEditorial").submit();
+        }
+
+        function postStory() {
+          var postCategory = document.getElementById("postStory");
+          var postNumVal = (postNum.value = "postStory");
+          console.log(postNumVal);
+          $("#postFormStory").submit();
+        }
+
+        function postPoem() {
+          var postCategory = document.getElementById("postPoem");
+          var postNumVal = (postNum.value = "postPoem");
+          console.log(postNumVal);
+          $("#postFormPoem").submit();
+        }
+      </script>

@@ -1,0 +1,238 @@
+<% if(message.length >0){ %>
+  <div class="alert alert-danger alert-dismissible" style="position: absolute;
+top: 0px;
+right: 1%;
+height: 100px;
+width: 400px;
+z-index: 99;">
+    <button type="button" id="btn" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+
+    </button>
+    <%= message %>
+  </div>
+  <% } %>
+    <nav class="navbar navbar-inverse">
+      <img src="/images/sample.png" class="sunbeamlogo">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/" class="navbar-brand">
+            <span>PBC SUNBEAM SCHOOL INC.</span>
+          </a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+
+
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">ABOUT
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="/history">History</a>
+                </li>
+                <li>
+                  <a href="/vmop">VMPO's</a>
+                </li>
+                <li>
+                  <a href="/policies">Policies</a>
+                </li>
+                <li>
+                  <a href="/orgchart">Organizational Chart</a>
+                </li>
+                <li>
+                  <a href="/facilities">Facilities</a>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">ACADEMICS
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="/curriculum">Curricular Offerings</a>
+                </li>
+                <li>
+                  <a href="/awards">Awards</a>
+                </li>
+                <li>
+                  <a href="/service">Services</a>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">ADMISSION
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="/admissionreq">Admission Guidelines</a>
+                </li>
+                <li>
+                  <a href="/scholarships">Scholarships</a>
+                </li>
+
+                <% if(!loginUser){ %>
+                  <li>
+                    <a href="/register">Register Now</a>
+                  </li>
+                  <%} %>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">COMMUNITY
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <% if(loginUser){ %>
+                  <li>
+                    <a href="/publication">Publication</a>
+                  </li>
+                  <%} %>
+                    <!-- <li> -->
+                    <!-- <a href="/faculty">Faculty and Staff</a> -->
+                    <!-- </li> -->
+                    <li>
+                      <a href="/clubs">Clubs</a>
+                    </li>
+                    <li>
+                      <a href="/activities">Activities</a>
+                    </li>
+                    <li>
+                      <a href="/news">News / Announcements</a>
+                    </li>
+                    <li>
+                      <a href="/gallery">Gallery</a>
+                    </li>
+              </ul>
+            </li>
+            <li>
+              <a data-toggle="modal" data-target="#search">
+                <span class="glyphicon glyphicon-search"></span> Search</a>
+            </li>
+            <% if (!loginUser) { %>
+              <li>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#loginModal">
+                  <span class="glyphicon glyphicon-log-in"></span> Login</button>
+              </li>
+              <% } else { %>
+
+                <li>
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <%= loginUser.profile.name %>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <% if(loginUser.isAdmin && loginUser.superUser){ %>
+                      <li>
+                        <a href="/users/new">
+                          <i class="fa fa-bars"></i>Admin Dashboard</a>
+                      </li>
+                      <% } else if(loginUser.isAdmin || loginUser.user == "faculty"){ %>
+                        <li>
+                          <a href="/encode1-grades">
+                            <i class="fa fa-bars"></i>Faculty Dashboard</a>
+                        </li>
+                        <% } else {%>
+                          <li>
+                            <a href="/viewgrade">
+                              <i class="fa fa-bars"></i> Student Dashboard</a>
+                          </li>
+                          <% } %>
+                            <li>
+                              <a href="/logout">
+                                <i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                  </ul>
+                </li>
+                <% } %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+    <div class="modal fade" id="loginModal" role="dialog">
+      <div class="modal-dialog modal-sm" sty>
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Login</h4>
+            <div class="row">
+
+
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div style="padding-top: 50px;">
+              <form action="/login" method="POST" class="col-auto" style="margin: 50px auto; box-shadow: none; border-radius: 10px;background-color:white;height: 50%;width:80%;">
+                <div style="margin-top:-70px;">
+                  <label style="color:black; font-weight:bold;">Username:</label>
+                  <input class="form-control" type="text" name="email" placeholder="EMAIL">
+                  <br>
+                  <label style="color:black; font-weight:bold;">Password:</label>
+                  <input class="form-control" type="password" name="password" placeholder="PASSWORD">
+                  <br>
+
+                  <center>
+                    <button id="pink" class="btn btn-primary" style=" border-radius:5px;font-weight:bold; font-family:Verdana; width: 50%;">SIGN IN</button>
+                  </center>
+                  <center>
+                    <a href="/forgot" style="color: black;">Forgot password</a>
+                  </center>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <script>
+      var delay = 2000;
+      window.onload = function () {
+        setTimeout(myfunction, delay)
+        // document.getElementById("btn").click();
+
+      };
+
+      function myfunction() {
+        document.getElementById("btn").click();
+      }
+    </script>
+
+    <div class="modal fade" id="search" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <!-- <div class="form-group"> -->
+            <form action="/search" method="GET">
+              <label for="name"></label>Search:
+          </div>
+
+          <br>
+          <center>
+            <input class="form-control" style=" width: 70% " name="search" type="text" placeholder="Search Key">
+            <br>
+            <br>
+            <button class="btn btn-default" style="width: 50%; height:  20%; margin-bottom: 50px">Search</button>
+          </center>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>

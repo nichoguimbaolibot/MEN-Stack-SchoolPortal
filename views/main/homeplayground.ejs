@@ -1,0 +1,174 @@
+<% layout("layout") -%>
+  <% include ../partials/Carousel %>
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">
+            Welcome to PBC Sunbeam School Inc.
+          </h1>
+          <br>
+          <p>A very warm welcome to the PBC Sunbeam School Inc.</h3>
+
+            <br>
+            <p> &nbsp&nbsp&nbsp At PBCSSI our mission is to provide an outstanding education and inspire our students to engage
+              in academic, spiritual and extra-curricular activities. Our students set high expectations for themselves,
+              enjoy school and the community is constantly rewarded by their achievements.
+            </p>
+            <br>
+            <p> &nbsp&nbsp&nbsp PBCSSI has earned its outstanding reputation through its students’ successes, its rigorous educational
+              programme, its excellent and dedicated staff, its caring community and its engagement in global issues. Our
+              curriculum develops student learning and understanding, a culture of thinking, inquiry and reflection, resilience
+              and independence and is always focused upon developing the wholeness of the child. Beyond the classroom, PBCSSI
+              offers its students many opportunities to reach the highest levels of attainment and performance. We hope that
+              by browsing our website you will gain insight into the many opportunities and challenges that we offer our
+              students and we would be delighted to welcome you to PBCSSI and to show you around our school. Please do not
+              hesitate to contact our Admissions Office if you would like further information.
+            </p>
+            <p>
+              <br> Romeo L. Dela Rosa
+              <br> Director
+            </p>
+        </div>
+      </div>
+    </div>
+    <div class="news_wrapper top_news_wrapper">
+      <center>
+        <h2>What's New?</h2>
+      </center>
+      <br>
+      <div class="col-md-6 news_wrapper btm_news_wrapper">
+        <div class="panel panel-info" style="min-height: 200px">
+          <div class="panel-heading">
+            <h4>
+              <a href="/news"> NEWS </a>
+            </h4>
+          </div>
+          <div class="panel-body" style=" overflow-y: scroll; height: 180px;" align="center">
+            <% if(news){ %>
+              <h4>
+                <%- news.title %>
+              </h4>
+              <p>
+                <%- news.content %>
+              </p>
+              <% }else{ %>
+                No news found!
+                <% } %>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-md-6 news_wrapper btm_news_wrapper">
+        <div class="panel panel-info" style="min-height: 200px">
+          <div class="panel-heading">
+            <h4>
+              <a href="/news"> ANNOUNCEMENTS </a>
+            </h4>
+          </div>
+          <div class="panel-body" style=" overflow-y: scroll; height: 180px;" align="center">
+            <% if(announcements){ %>
+              <h4>
+                <%- announcements.title %>
+              </h4>
+              <p>
+                <%- announcements.content %>
+              </p>
+              <% }else{ %>
+                No Announcement Found
+                <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container gallery">
+      <div class="row">
+        <div class="col-lg-12">
+          <center>
+            <h2 style="padding-top: 1cm; padding-bottom: 1cm">Our Gallery</h2>
+          </center>
+        </div>
+      </div>
+
+      <div class="gallery-content">
+        <div class="samples">
+          <div class="col-md-4 sample">
+            <div class="image-contain">
+              <img src="/images/picture/DSC_0092.png" class="img-responsive" />
+              <a target="_blank" href="/images/picture/DSC_0092.png" class="prettyPhoto bttn bttn-view-detail skin-fill-blue">
+                <span class="glyphicon glyphicon-search"></span>
+              </a>
+              <a href="/gallery" class="pp_default bttn bttn-go-to skin-fill-blue">
+                <span class="fa fa-mail-forward"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="samples">
+          <div class="col-md-4 sample">
+            <div class="image-contain">
+              <img src="/images/picture/DSC_0089.png" class="img-responsive" />
+              <a target="_blank" href="/images/picture/DSC_0089.png" class="prettyPhoto bttn bttn-view-detail skin-fill-blue">
+                <span class="glyphicon glyphicon-search"></span>
+              </a>
+              <a href="/gallery" class="pp_default bttn bttn-go-to skin-fill-blue">
+                <span class="fa fa-mail-forward"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="samples">
+          <div class="col-md-4 sample">
+            <div class="image-contain">
+              <img src="/images/picture/IMG_20180426_111901.png" style="height: 233px ;width: 400px" class="img-responsive" />
+              <a target="_blank" href="/images/picture/IMG_20180426_111901.png" class="prettyPhoto bttn bttn-view-detail skin-fill-blue">
+                <span class="glyphicon glyphicon-search"></span>
+              </a>
+              <a href="/gallery" class="pp_default bttn bttn-go-to skin-fill-blue">
+                <span class="fa fa-mail-forward"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="samples">
+          <div class="col-md-4 sample">
+            <div class="image-contain">
+              <img src="/images/picture/DSC_0147.png" class="img-responsive" />
+              <a target="_blank" href="/images/picture/DSC_0147.png" class="prettyPhoto bttn bttn-view-detail skin-fill-blue">
+                <span class="glyphicon glyphicon-search"></span>
+              </a>
+              <a href="/gallery" class="pp_default bttn bttn-go-to skin-fill-blue">
+                <span class="fa fa-mail-forward"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="samples">
+          <div class="col-md-4 sample">
+            <div class="image-contain">
+              <img src="/images/picture/DSC_0115.png" class="img-responsive" />
+              <a target="_blank" href="/images/picture/DSC_0115.png" class="prettyPhoto bttn bttn-view-detail skin-fill-blue">
+                <span class="glyphicon glyphicon-search"></span>
+              </a>
+              <a href="/gallery" class="pp_default bttn bttn-go-to skin-fill-blue">
+                <span class="fa fa-mail-forward"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="samples">
+          <div class="col-md-4 sample">
+            <div class="image-contain">
+              <img src="/images/g3.png" class="img-responsive" />
+              <a target="_blank" href="/images/g3.png" class="prettyPhoto bttn bttn-view-detail skin-fill-blue">
+                <span class="glyphicon glyphicon-search"></span>
+              </a>
+              <a href="/gallery" class="pp_default bttn bttn-go-to skin-fill-blue">
+                <span class="fa fa-mail-forward"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

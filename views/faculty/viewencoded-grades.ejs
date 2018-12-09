@@ -1,0 +1,237 @@
+<% if(message && message.length >0){ %>
+    <div class="alert alert-warning alert-dismissible" style="position: absolute;
+	top: 0px;
+	right: 1%;
+	height: 100px;
+	width: 400px;
+	z-index: 99;">
+        <button type="button" id="btn" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+
+        </button>
+        <%= message %>
+    </div>
+    <% } %>
+        <% layout("layout") -%>
+            <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+                <div class="col-lg-12">
+                    <% include ../partials/facultypanel %>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="container">
+                    <div class="panel panel-info  col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 80px; height:460px;">
+
+                        <div class="panel-heading" style="color: #ffffff;">View Student Grades</div>
+
+
+                        <div class="container ">
+                            <div class="dropdown " style="margin-top:5px; margin-left: -10px; ">
+                                <form id="delete-form" action="/viewencoded-grades" method="GET">
+                                    <select onChange="appendSection()" id="yrLvl" name="yrLvl1" class="btn btn-default">
+                                        <option value="">Choose a year level...</option>
+                                        <option id="1" value="grade1">Grade 1</option>
+                                        <option id="2" value="grade2">Grade 2</option>
+                                        <option id="3" value="grade3">Grade 3</option>
+                                        <option id="4" value="grade4">Grade 4</option>
+                                        <option id="5" value="grade5">Grade 5</option>
+                                        <option id="6" value="grade6">Grade 6</option>
+                                        <option id="7" value="grade7">Grade 7</option>
+                                        <option id="8" value="grade8">Grade 8</option>
+                                        <option id="9" value="grade9">Grade 9</option>
+                                        <option id="10" value="grade10">Grade 10</option>
+                                        <option id="11" value="grade11">Grade 11</option>
+                                        <option id="12" value="grade12">Grade 12</option>
+                                    </select>
+                                    <select id="section1" name="section" class="btn btn-default">
+                                        <option value="">Choose a section...</option>
+
+                                    </select>
+                                    <button class="btn btn-info">FIND</button>
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <br>
+                        <div class="table-responsive">
+                            <div style="overflow-y: scroll; height:330px; ">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th style="color: #ffffff; background-color: #020531;">Year</th>
+                                            <th style="color: #ffffff; background-color: #020531;">Section</th>
+                                            <th style="color: #ffffff; background-color: #020531;">Subject</th>
+                                            <th style="color: #ffffff; background-color: #020531;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tr>
+                                        <% handles.forEach(function(handle){ %>
+                                            <td>
+                                                <%= handle.yrLvl %>
+                                            </td>
+                                            <td>
+                                                <%= handle.section %>
+                                            </td>
+                                            <td>
+                                                <%= handle.subject %>
+                                            </td>
+                                            <td>
+                                                <a href="/viewgrades/<%= handle.faculty %>/<%= handle.yrLvl %>/<%= handle.subject %>/<%= handle.section %>">
+                                                    <button class="fa fa-eye " aria-hidden="true" style="color: black">VIEW</button>
+                                                </a>
+                                            </td>
+                                    </tr>
+                                    <% }); %>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+            </div>
+            </div>
+            <script>
+                function appendSection() {
+                    var value = document.getElementById("yrLvl").value;
+                    if (value === "grade1") {
+                        $("#section1").empty();
+                        $("#section1").append(
+                            '<option value="" >Choose a section...</option>' +
+                            '<option value="joy">Joy</option><option value="love">Love</option>');
+
+                        $("#subject8").prop("disabled", true);
+                        $("#subject9").prop("disabled", true);
+                        $("#subject10").prop("disabled", true);
+                        $("#faculty8").prop("disabled", true);
+                        $("#faculty9").prop("disabled", true);
+                        $("#faculty10").prop("disabled", true);
+                    } else if (value === "grade2") {
+                        $("#section1").empty();
+                        $("#section1").append(
+                            '<option value="" >Choose a section...</option>' +
+                            '<option value="honor">Honor</option><option value="unity">Unity</option></select>');
+                    } else if (value === "grade3") {
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="" >Choose a section...</option>' +
+                                '<option value="kindness">Kindness</option>' +
+                                '<option value="faith">Faith</option>' +
+                                '<option value="helpfulness">Helpfulness</option>'
+                            );
+
+
+                    } else if (value === "grade4") {
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="" >Choose a section...</option>' +
+                                '<option value="generosity">Generosity</option>' +
+                                '<option value="charity">Charity</option>'
+                            );
+
+
+                    } else if (value === "grade5") {
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="" >Choose a section...</option>' +
+                                '<option value="cooperate">Cooperate</option>' +
+                                '<option value="punctuality">Punctuality</option>'
+                            );
+
+
+                    } else if (value === "grade6") {
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="">Choose a section...</option>' +
+                                '<option value="courage">Courage</option>' +
+                                '<option value="responsibility">Responsibiliy</option>'
+                            );
+
+
+
+
+                    } else if (value === "grade7") {
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="">Choose a section...</option>' +
+                                '<option value="faithfulness">Faithfulness</option>' +
+                                '<option value="obedience">Obedience</option>' +
+                                '<option value="humility">Humility</option>' +
+                                '<option value="patience">Patience</option>' +
+                                '<option value="frugality">Frugality</option>'
+                            );
+
+
+
+
+                    } else if (value === "grade8") {
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="">Choose a section...</option>' +
+                                '<option value="gratitude">Gratitude</option>' +
+                                '<option value="solidarity">Solidarity</option>' +
+                                '<option value="compassion">Compassion</option>' +
+                                '<option value="fortitude">Fortitude</option>' +
+                                '<option value="perseverance">Perseverance</option>'
+                            );
+
+
+                    } else if (value === "grade9") {
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="">Choose a section...</option>' +
+                                '<option value="dignity">Dignity</option>' +
+                                '<option value="sincerity">Sincerity</option>' +
+                                '<option value="serenity">Serenity</option>' +
+                                '<option value="diligence">Diligence</option>'
+                            );
+
+
+                    } else if (value === "grade10") {
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="">Choose a section...</option>' +
+                                '<option value="prudence">Prudence</option>' +
+                                '<option value="leadership">Leadership</option>' +
+                                '<option value="knowledge">Knowledge</option>' +
+                                '<option value="wisdom">Wisdom</option>'
+                            );
+
+                    } else if (value === "grade11") {
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="">Choose a section...</option>' +
+                                '<option value="Sciences Technology Engineering and Mathematics">Sciences Technology Engineering and Mathematics</option>' +
+                                '<option value="Accountancy">Accountancy</option>' +
+                                '<option value="Business Management">Business Management</option>' +
+                                '<option value="Humanities and Social Sciences">Humanities and Social Sciences</option>' +
+                                '<option value="Information and Communication Technology">Information and Communication Technology</option>' +
+                                '<option value="Home Economics">Home Economics</option>'
+                            );
+                    } else if (value === "grade12") {
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="">Choose a section...</option>' +
+                                '<option value="Sciences Technology Engineering and Mathematics">Sciences Technology Engineering and Mathematics</option>' +
+                                '<option value="Accountancy">Accountancy</option>' +
+                                '<option value="Business Management">Business Management</option>' +
+                                '<option value="Humanities and Social Sciences">Humanities and Social Sciences</option>' +
+                                '<option value="Information and Communication Technology">Information and Communication Technology</option>' +
+                                '<option value="Home Economics">Home Economics</option>'
+                            );
+                    }
+                }
+            </script>

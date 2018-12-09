@@ -1,0 +1,160 @@
+<% if(message && message.length >0){ %>
+    <div class="alert alert-warning alert-dismissible" style="position: absolute;
+	top: 0px;
+	right: 1%;
+	height: 100px;
+	width: 400px;
+	z-index: 99;">
+        <button type="button" id="btn" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+
+        </button>
+        <%= message %>
+    </div>
+    <% } %>
+        <% layout("layout") -%>
+            <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+                <div class="col-lg-12">
+                    <% include ../partials/facultypanel %>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="container">
+                    <div class="panel panel-info  col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 80px; height:460px;">
+
+                        <div class="panel-heading" style="color: #ffffff;">Encode Student Grades</div>
+
+
+                        <div class="container ">
+                            <br>
+                            <label for="usr " style="margin-left: 5px; ">Year:
+                                <strong>
+                                    <%= yrLvl %>
+                                </strong>
+                            </label>
+                            <label for="usr " style="margin-left: 55px; ">Section:
+                                <strong>
+                                    <%= section %>
+                                </strong>
+                            </label>
+                            <label for="usr " style="margin-left: 110px; ">Subject:
+                                <strong>
+                                    <%= subject %>
+                                </strong>
+                            </label>
+                            <br>
+                        </div>
+
+
+                        <br>
+                        <div class="table-responsive">
+                            <div style="overflow-y: scroll; height:350px; ">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <tr>
+                                                <% if(yrLvl === "grade11" || yrLvl === "grade12"){ %>
+                                                    <th style="color: #ffffff; background-color: #020531;">Student </th>
+                                                    <th style="color: #ffffff; background-color: #020531;">First Semester</th>
+                                                    <th style="color: #ffffff; background-color: #020531;">Second Semester</th>
+                                                    <% }else{ %>
+                                                        <th style="color: #ffffff; background-color: #020531;">Student </th>
+                                                        <th style="color: #ffffff; background-color: #020531;">1st Grading</th>
+                                                        <th style="color: #ffffff; background-color: #020531;">2nd Grading</th>
+                                                        <th style="color: #ffffff; background-color: #020531;">3rd Grading</th>
+                                                        <th style="color: #ffffff; background-color: #020531;">4th Grading</th>
+                                                        <th style="color: #ffffff; background-color: #020531;">Final Grading</th>
+                                                        <th style="color: #ffffff; background-color: #020531;">Remark</th>
+                                                        <% } %>
+                                            </tr>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <%if(!(yrLvl === "grade11" || yrLvl === "grade12")){ %>
+                                            <% subjects.forEach(function(subject){ %>
+                                                <tr>
+                                                    <input type="hidden" value="<%= subject._id %>" name="id[]" />
+                                                    <td>
+                                                        <%= subject.lastName %>,
+                                                            <%= subject.firstName %>
+                                                                <%= subject.middleName %>
+                                                    </td>
+                                                    <td>
+                                                        <%= subject.firstGrading %>
+                                                            <!-- <input disabled id="first" value="" name="firstGrading[]" type="number" min="0" max="100" style="width:60px;" class="form-control"> -->
+                                                    </td>
+                                                    <td>
+                                                        <%= subject.secondGrading %>
+                                                            <!-- <input disabled id="second" value="" name="secondGrading[]" type="number" min="0" max="100" style="width:60px" -->
+                                                            <!-- class="form-control"> -->
+                                                    </td>
+                                                    <td>
+                                                        <%= subject.thirdGrading %>
+                                                            <!-- <input disabled id="third" value="" name="thirdGrading[]" type="number" min="0" max="100" style="width:60px"
+                                                            class="form-control"> -->
+                                                    </td>
+                                                    <td>
+                                                        <%= subject.fourthGrading %>
+                                                            <!-- <input disabled id="fourth" value="<%= subject.fourthGrading %>" name="fourthGrading[]" type="number" min="0" max="100" style="width:60px"
+                                                            class="form-control"> -->
+                                                    </td>
+                                                    <td>
+                                                        <% if (subject.fourthGrading > 0) { %>
+                                                            <%= (parseFloat(subject.firstGrading)  +  parseFloat(subject.secondGrading) +  parseFloat(subject.thirdGrading) + parseFloat(subject.fourthGrading)) / 4 %>
+                                                                <!-- <input disabled value=""
+                                                                name="finalGrading[]" type="number" min="0" max="100" style="width:60px"
+                                                                class="form-control"> -->
+                                                                <% } else { %>
+                                                                    <!-- <input disabled value="" name="finalGrading[]" type="number" min="0" max="100" style="width:60px" class="form-control"> -->
+                                                                    <% } %>
+                                                    </td>
+                                                    <td>
+                                                        <% if (((parseFloat(subject.firstGrading)  +  parseFloat(subject.secondGrading) +  parseFloat(subject.thirdGrading) + parseFloat(subject.fourthGrading)) / 4) > 75) { %>
+                                                            Passed!
+                                                            <!-- <input disabled id="remarks" value="" name="remarks[]" type="text" style="width:60px" class="form-control"> -->
+                                                            <% } else if (((parseFloat(subject.firstGrading)  +  parseFloat(subject.secondGrading) +  parseFloat(subject.thirdGrading) + parseFloat(subject.fourthGrading)) / 4) < 75) { %>
+                                                                Failed!
+                                                                <!-- <input disabled id="remarks" value="" name="remarks[]" type="text" style="width:60px" class="form-control"> -->
+                                                                <% } else { %>
+                                                                    <!-- <input disabled id="remarks" value="" name="remarks[]" type="text" style="width:60px" class="form-control"> -->
+                                                                    <% } %>
+                                                    </td>
+                                                </tr>
+                                                <% }); %>
+                                                    <% }else{ %>
+                                                        <% subjects.forEach(function(subject){ %>
+                                                            <tr>
+                                                                <input type="hidden" value="<%= subject._id %>" name="id[]" />
+                                                                <td>
+                                                                    <%= subject.lastName %>,
+                                                                        <%= subject.firstName %>
+                                                                            <%= subject.middleName %>
+                                                                </td>
+                                                                <td>
+                                                                    <%= subject.firstSem %>
+                                                                        <!-- <input disabled id="firstSem" value="<%= subject.firstSem %>" name="firstSem[]" type="number" min="0" max="100" style="width:60px"
+                                                                        class="form-control"> -->
+                                                                </td>
+                                                                <td>
+                                                                    <%= subject.secondSem %>
+                                                                        <!-- <input disabled id="secondSem" value="<%= subject.secondSem %>" name="secondSem[]" type="number" min="0" max="100" style="width:60px"
+                                                                        class="form-control"> -->
+                                                                </td>
+                                                            </tr>
+                                                            <% }); %>
+                                                                <% } %>
+
+
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            <script>
+            </script>

@@ -1,0 +1,90 @@
+<!-- ganto lagi simula -->
+<% if(message && message.length >0){ %>
+    <div class="alert alert-warning alert-dismissible" style= "position: absolute;
+	top: 0px;
+	right: 1%;
+	height: 100px;
+	width: 400px;
+	z-index: 99;">
+        <button type="button" id="btn" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+
+        </button>
+        <%= message %>
+    </div>
+    <% } %>
+<% layout("layout") -%>
+  <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+    <div class="col-lg-12">
+      <% include ../partials/facultypanel %>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="container">
+      <div class="panel panel-info  col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 80px; min-height:500px;">
+        <!-- heading ng panel -->
+        <div class="panel-heading" style="color: #ffffff;">Manage Publications</div>
+
+        <!-- dito ung laman ng ejs ung form  -->
+        <div class="container ">
+          <div class="dropdown " style="margin-top:5px; margin-left: -10px; ">
+            <button style="border-radius: 5px; " class="dropdown-toggle " type="button " data-toggle="dropdown ">Status
+              <span class="caret "></span>
+            </button>
+            <ul class="dropdown-menu ">
+              <li>
+                <a href="# ">All</a>
+              </li>
+              <li>
+                <a href="# ">Approved</a>
+              </li>
+              <li>
+                <a href="# ">Pending</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <br>
+        <div class="table-responsive">
+          <div style="overflow-y: scroll; height:350px; ">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th style="color: #ffffff; background-color: #020531;">Publication No.</th>
+                  <th style="color: #ffffff; background-color: #020531;">Category</th>
+                  <th style="color: #ffffff; background-color: #020531;">Title</th>
+                  <th style="color: #ffffff; background-color: #020531;">AuthorID</th>
+                  <th style="color: #ffffff; background-color: #020531;">Author Name</th>
+                  <th style="color: #ffffff; background-color: #020531;">Date Posted/Uploaded</th>
+                </tr>
+              </thead>
+
+            </table>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div style="text-align: right;" style="padding: 5px;">
+              <button style="width: 100px;" class="btn btn-primary">
+                Approve</button>
+              <button type="button" style="width: 100px;" class="btn btn-success">
+                Edit</button>
+              <button type="button" style="width: 100px; margin-right:5px;" class="btn btn-danger">
+                Delete</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  </div>

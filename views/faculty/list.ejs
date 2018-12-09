@@ -1,0 +1,81 @@
+<% if(message && message.length >0){ %>
+    <div class="alert alert-warning alert-dismissible" style= "position: absolute;
+	top: 0px;
+	right: 1%;
+	height: 100px;
+	width: 400px;
+	z-index: 99;">
+        <button type="button" id="btn" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+
+        </button>
+        <%= message %>
+    </div>
+    <% } %>
+<% layout("layout") -%>
+    <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+        <div class="col-lg-12">
+            <% include ../partials/facultypanel %>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="container">
+            <div class="panel panel-info  col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 80px; height:460px;">
+
+                <div class="panel-heading" style="color: #ffffff;">Encode Student Grades</div>
+
+
+                <div class="container ">
+                    <div class="dropdown " style="margin-top:5px; margin-left: -10px; ">
+                        <button style="border-radius: 5px; " class="dropdown-toggle " type="button " data-toggle="dropdown ">--Please Select--
+                            <span class="caret "></span>
+                        </button>
+                        <ul class="dropdown-menu ">
+                            <li>
+                                <a href="# ">Subject</a>
+                            </li>
+                            <li>
+                                <a href="# ">Year</a>
+                            </li>
+                            <li>
+                                <a href="# ">Section</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <br>
+                <div class="table-responsive">
+                    <div style="overflow-y: scroll; height:350px; ">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="color: #ffffff; background-color: #020531;">Year</th>
+                                    <th style="color: #ffffff; background-color: #020531;">Section</th>
+                                    <th style="color: #ffffff; background-color: #020531;">Subject</th>
+                                    <th style="color: #ffffff; background-color: #020531;">Action</th>
+                                </tr>
+                            </thead>
+                            
+                            <tr>
+                                <td>Grade 1</td>
+                                <td>Matthews</td>
+                                <td>Math</td>
+                                <td>
+                                    <button>
+                                        <i class="fa fa-eye " aria-hidden="true "></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    </div>
+    </div>

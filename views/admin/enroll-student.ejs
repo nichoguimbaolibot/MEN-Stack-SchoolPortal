@@ -1,0 +1,98 @@
+<% if(message.length >0){ %>
+  <div class="alert alert-warning alert-dismissible" style="position: absolute;
+	top: 0px;
+	right: 1%;
+	height: 100px;
+	width: 400px;
+	z-index: 99;">
+    <button type="button" id="btn" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+
+    </button>
+    <%= message %>
+  </div>
+  <% } %>
+    <% layout("layout") -%>
+      <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+        <div class="col-lg-12">
+          <% include ../partials/adminpanel %>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="container">
+          <div class="panel panel-info  col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 80px; min-height: 500px;">
+            <div class="panel-heading" style="color: #ffffff;">
+
+              Manage Enrollment
+
+            </div>
+            <div class="row">
+              <div class="dropdown" style="margin-top:5px; margin-left: 2%">
+                <button style="border-radius: 5px;" class="dropdown-toggle btn btn-default" type="button" data-toggle="dropdown">--Sort By--
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <button class="btn btn-default form-control" onClick="postLastName()">Last Name</button>
+                    <form id="postFormLastName" action="/enrollment" method="GET">
+                      <input type="hidden" value="postLastName" id="postLastName" name="lastName" />
+                    </form>
+                  </li>
+                </ul>
+              </div>
+              <div style="margin-left: 2%; margin-bottom: 1%">
+                <form id="delete-form" action="/enrollment" method="GET">
+                  <input type="text" name="idNumber" class="btn btn-default" />
+                  <button class="btn btn-info">Find</button>
+                </form>
+              </div>
+            </div>
+
+
+            <div class="table-responsive">
+              <div style="overflow-y: scroll; height:350px; ">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th style="color: #ffffff; background-color: #020531;">ID No:</th>
+                      <th style="color: #ffffff; background-color: #020531;">Name</th>
+                      <th style="color: #ffffff; background-color: #020531;">Type</th>
+                      <th style="color: #ffffff; background-color: #020531;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% users.forEach(function(user){ %>
+                      <tr>
+                        <td>
+                          <%= user.idNumber %>
+                        </td>
+                        <td>
+                          <%= user.profile.lastName %>,
+                            <%= user.profile.firstName %>
+                              <%= user.profile.middleName %>
+                        </td>
+                        <td>
+                          <%= user.user %>
+                        </td>
+                        <td>
+                          <a class="btn btn-info btn-sm" href="/enrollment/<%= user._id %>">
+                            MANAGE ENROLL
+                          </a>
+                        </td>
+                      </tr>
+                      <% }); %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        function postLastName() {
+          var postLastName = document.getElementById("postLastName");
+          var postNumVal = (postLastName.value = "postLastName");
+          // console.log(postNumVal);
+          $("#postFormLastName").submit();
+        }
+      </script>

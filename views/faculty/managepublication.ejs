@@ -1,0 +1,74 @@
+<% if(message && message.length >0){ %>
+    <div class="alert alert-warning alert-dismissible" style= "position: absolute;
+	top: 0px;
+	right: 1%;
+	height: 100px;
+	width: 400px;
+	z-index: 99;">
+        <button type="button" id="btn" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+
+        </button>
+        <%= message %>
+    </div>
+    <% } %>
+<% layout("layout") -%>
+  <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+    <div class="col-lg-12">
+      <% include ../partials/facultypanel %>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="container">
+      <div class="panel panel-info col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 80px; min-height:500px;">
+        <div class="panel-heading" style="color: #ffffff;">
+          Manage Publication
+
+        </div>
+        <br>
+        <div class="table-responsive">
+          <div style="overflow-y: scroll; height:400px; ">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th style="color: #ffffff; background-color: #020531;">Publication #</th>
+                  <th style="color: #ffffff; background-color: #020531;">Type</th>
+                  <th style="color: #ffffff; background-color: #020531;">Name</th>
+                  <th style="color: #ffffff; background-color: #020531;">Title</th>
+                  <th style="color: #ffffff; background-color: #020531;">Content</th>
+                  <th style="color: #ffffff; background-color: #020531;">Date Submitted</th>
+                  <th style="color: #ffffff; background-color: #020531;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2018-00000</td>
+                  <td>Photography</td>
+
+                  <td>Jose Carlo San Pedro</td>
+                  <td>Yow</td>
+                  <td>Chenes</td>
+                  <td>April 2, 2018</td>
+                  <td>
+                    <a href="/facultyviewpubs">
+                      <button>
+                        <i class="fa fa-eye" aria-hidden="true" style="color:black"></i>
+                      </button>
+                    </a>
+                    <button>
+                      <i class="fa fa-check" aria-hidden="true" style="color:green"></i>
+                    </button>
+                    <button>
+                      <i class="fa fa-trash-o" aria-hidden="true" style="color:red"></i>
+                    </button>
+                  </td>
+
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

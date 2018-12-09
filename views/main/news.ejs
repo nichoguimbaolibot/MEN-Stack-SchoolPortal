@@ -1,0 +1,102 @@
+<% layout("layout") -%>
+  <% include ../partials/Carousel %>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">
+            NEWS AND ANNOUNCEMENTS
+          </h1>
+          <br>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="col-lg-6">
+        <div class="panel panel-info" style="min-height: 200px;">
+          <div class="panel-heading" style="text-align:center;">
+            <h4>
+              <a> LATEST NEWS </a>
+            </h4>
+          </div>
+          <div class="panel-body" style=" overflow-y: scroll; height: 180px;">
+            <ul>
+              <% news.forEach(function(news){ %>
+                <li>
+                  <a data-toggle="modal" data-target="#<%= news._id %>" style="color: #020531">
+                    <%= news.title %>
+                  </a>
+                </li>
+                <div class="modal fade" id="<%= news._id %>" role="dialog">
+                  <div class="modal-dialog modal-m">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">
+                          <%= news.title %>
+                        </h4>
+                        <label>
+                          <%= moment(news.publishDate).format("LL") %>
+                        </label>
+                      </div>
+                      <div class="modal-body">
+
+                        <br>
+                        <div style="overflow-y: scroll; height: 250px;">
+                          <label>
+                            <%- news.content %>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% }); %>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="panel panel-info" style="min-height: 200px">
+          <div class="panel-heading" style="text-align:center;">
+            <h4>
+              <a> LATEST ANNOUNCEMENTS </a>
+            </h4>
+          </div>
+          <div class="panel-body" style=" overflow-y: scroll; height: 180px;">
+            <ul>
+              <% announcements.forEach(function(announce){ %>
+                <li>
+                  <a data-toggle="modal" data-target="#<%= announce._id %>" style="color: #020531">
+                    <%= announce.title %>
+                  </a>
+                </li>
+                <div class="modal fade" id="<%= announce._id %>" role="dialog">
+                  <div class="modal-dialog modal-m">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">
+                          <%= announce.title %>
+                        </h4>
+                        <label>
+                          <%= moment(announce.publishDate).format("LL") %>
+                        </label>
+                      </div>
+                      <div class="modal-body">
+                        <br>
+                        <div style="overflow-y: scroll; height: 250px;">
+                          <label>
+                            <%- announce.content %>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% }); %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>

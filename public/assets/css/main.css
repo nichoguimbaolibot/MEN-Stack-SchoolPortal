@@ -1,0 +1,18 @@
+/*------------------------------------------------------------------
+[Main Stylesheet]
+
+Project:	Fitness First
+Version:	1.0.0
+Author: Kamleshyadav
+Website: http://himanshusofttech.com/
+Purchase: http://themeforest.net/user/kamleshyadav
+-------------------------------------------------------------------*/
+@import url("fonts.css");
+@import url("font-awesome.css");
+@import url("owl.carousel.css");
+@import url("owl.theme.default.css");
+@import url("animate.css");
+@import url("magnific-popup.css");
+@import url("../js/plugin/revol/navigation.css");
+@import url("../js/plugin/revol/settings.css");
+@import url("style.css");

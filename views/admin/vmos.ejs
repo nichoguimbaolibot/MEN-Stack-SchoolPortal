@@ -1,0 +1,46 @@
+<% layout("layout") -%>
+    <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+        <div class="col-lg-12">
+            <% include ../partials/adminpanel %>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="container">
+            <div class="panel panel-info col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 80px; height:1050px;">
+                <div class="panel-heading" style="color: #ffffff;">
+
+                    Vision and Mission
+
+                </div>
+                <br>
+                <center>
+                    <form action="/vmos" method="POST">
+                        <div class="form-group" style="padding: 5px;">
+                            <label for="content" style="color:black;  text-align: center">Vision:</label>
+                            <textarea style="width:100%; height: 400px;" placeholder="Write a content..." name="vision" class="form-control" id="vision">
+
+                                <%= visionmission.slice(-1)[0].vision %>
+                            </textarea>
+                        </div>
+                        <div class="form-group" style="padding: 5px;">
+                            <label for="content" style="color:black; text-align: center">Mission:</label>
+                            <textarea style="width:100%; height: 400px;" placeholder="Write a content..." name="mission" class="form-control" id="mission">
+
+                                <%= visionmission.slice(-1)[0].mission %>
+                            </textarea>
+
+                        </div>
+                        <div style="text-align: right;" style="padding: 5px;">
+                            <button style="width: 100px;" class="btn btn-primary">
+                                Post</button>
+                            <button onClick="discard()" type="button" style="width: 100px; margin-right:5px;" class="btn btn-danger">
+                                Discard</button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+        <div>
+        </div>
+    </div>
+    </div>
+    </div>

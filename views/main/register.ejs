@@ -1,0 +1,275 @@
+<% if(errors && errors.length >0){ %>
+  <div class="alert alert-danger alert-dismissible" style="position: absolute;
+  top: 0px;
+  right: 1%;
+  height: 100px;
+  width: 400px;
+  z-index: 99;">
+    <button type="button" class="close" id="btn" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+
+    </button>
+
+    <br>
+    <%= errors %>
+  </div>
+  <% } %>
+    <% layout("layout") -%>
+      <% include ../partials/Carousel %>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <h1 class="page-header">
+                REGISTRATION
+              </h1>
+              <br>
+              <h5>Register now and be a part of our growing community! After filling up and submitting the necessary deatils,
+                be sure to download our admission form by clicking on the button below.</h5>
+            </div>
+          </div>
+          <br>
+          <div class="carousel-inner">
+            <div class="item active">
+              <div class="fill" style="background-image:url('/images/h1.jpg');"></div>
+              <div class="carousel-caption">
+              </div>
+            </div>
+            <div class="container" id="reg-info">
+              <div class="row">
+                <div class="col-sm-2">
+
+                </div>
+
+
+                <div class="col-sm-8">
+
+                  <div class(="well well-sm" style="padding-left:100px;padding-right: 100px;padding-bottom: 50px;padding-top: 30px;background-color:#ffffff">
+                    <select onchange="student()" name="status" id="neworold">
+                      <option value="new">New Student</option>
+                      <option value="old">Old Student</option>
+                    </select>
+                    <br>
+
+                    <br>
+                    <form id="register-data" action="/register" method="POST">
+                      <div class="form-group" id="stno" style="display: none">
+                        <label for="pwd">Student no:</label>
+                        <input type="number" class="form-control" name="stuno" id="stuno">
+                      </div>
+                      <div class="form-group">
+                        <label for="pwd">First Name:</label>
+                        <input style="text-transform: capitalize;" type="text" class="form-control" name="firstName" id="fname">
+                      </div>
+                      <div class="form-group">
+                        <label for="pwd">Last Name:</label>
+                        <input style="text-transform: capitalize;" type="text" class="form-control" name="lastName" id="lname">
+                      </div>
+                      <div class="form-group">
+                        <label for="pwd">Middle Name:</label>
+                        <input style="text-transform: capitalize;" type="text" class="form-control" name="middleName" id="mname">
+                      </div>
+                      <label>Birthdate: </label>
+                      <div class="form-group">
+                        <select class="btn btn-default" onchange="agecalculator()" name="year" id="year">
+                        </select>
+                        <select class="btn btn-default" onchange="agecalculator()" name="month" id="month">
+                          <option value="01">January</option>
+                          <option value="02">February</option>
+                          <option value="03">March</option>
+                          <option value="04">April</option>
+                          <option value="05">May</option>
+                          <option value="06">June</option>
+                          <option value="07">July</option>
+                          <option value="08">August</option>
+                          <option value="09">September</option>
+                          <option value="10">October</option>
+                          <option value="11">November</option>
+                          <option value="12">December</option>
+                        </select>
+                        <select class="btn btn-default" onchange="agecalculator()" name="day" id="day">
+
+                        </select>
+                      </div>
+                      <div class="form-group" style="display: none">
+                        <label for="pwd">Age:</label>
+                        <input type="number" min="0" class="form-control" name="age" id="age">
+                      </div>
+                      <div class="form-group">
+                        <label for="pwd">Age:</label>
+                        <input disabled type="number" min="0" class="form-control" name="age2" id="age2">
+                      </div>
+                      <div class="form-group">
+                        <label for="pwd">Address:</label>
+                        <input type="text" class="form-control" name="address" id="address">
+                      </div>
+                      <div class="form-group">
+                        <label for="pwd">Email Address:</label>
+                        <input type="Email" class="form-control" name="email" id="emailadd">
+                      </div>
+                      <div class="form-group" style="margin-top:44px">
+                        <label for="">Gender:</label>
+                        <label class="radio-inline" style="margin-left: 1%;">
+                          <input type="radio" id="gender" name="gender" value="female">Female
+                        </label>
+                        <label class="radio-inline" style="margin-left: 2%;">
+                          <input type="radio" id="gender" name="gender" value="male">Male
+                        </label>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="pwd">Contact Number:</label>
+                        <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number"
+                          maxlength="11" class="form-control" name="contact" id="contact">
+                      </div>
+                      <button class="btn btn-primary" style="border: 1px solid #020531; border-radius: 3px; width: 100%; margin-left: -0.1%">
+                        <span class="fa fa-list-alt"></span> Register</button>
+                    </form>
+                    <a href="https://drive.google.com/open?id=19nxvoB0xSpx1ggOBm2NoqjtsVb7vweiB">
+                      <button type="button" class="btn btn-primary" style="display:block; border: 1px solid #020531; border-radius: 3px; width: 100%; margin-left: -0.1%">
+                        <span class="fa fa-download"></span> Download Admission Form</button>
+                    </a>
+                    <br>
+                    <% if(success && success.length >0){ %>
+                      <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+
+                        </button>
+                        <%= success %>
+                      </div>
+                      <% } %>
+
+                  </div>
+
+
+                  <div class="col-sm-2"></div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <!-- <div class="container" id="reg-info">
+      <div class="well well-sm" style="padding-left:100px;padding-right: 100px;padding-bottom: 50px;padding-top: 30px;background-color:#ffffff">
+        <form id="register-data" action="/register" method="POST">
+          <div class="form-group">
+            <label for="pwd">First Name:</label>
+            <input type="text" class="form-control" id="fname">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Last Name:</label>
+            <input type="text" class="form-control" id="lname">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Middle Name:</label>
+            <input type="text" class="form-control" id="mname">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Age:</label>
+            <input type="text" class="form-control" id="age">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Address:</label>
+            <input type="text" class="form-control" id="address">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Email Address:</label>
+            <input type="Email" class="form-control" id="emailadd">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Contact Number:</label>
+            <input type="text" class="form-control" id="contact">
+          </div>
+          <div class="form-group">
+            <label for="">Incoming Year Level: </label>
+            <br>
+            <select id="month" name="selectyrlevel" class="form-control">
+              <option value="1">Kinder 1</option>
+              <option value="2">Kinder 2</option>
+              <option value="3">Kinder 3</option>
+              <option value="4">Grade 1</option>
+              <option value="5">Grade 2</option>
+              <option value="6">Grade 3</option>
+              <option value="7">Grade 4</option>
+              <option value="8">Grade 5</option>
+              <option value="9">Grade 6</option>
+              <option value="10">Grade 7</option>
+              <option value="11">Grade 8</option>
+              <option value="12">Grade 9</option>
+              <option value="13">Grade 10</option>
+              <option value="14">Grade 11</option>
+              <option value="15">Grade 12</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="">Gender:</label>
+            <label class="radio-inline" style="margin-left: 1%;">
+              <input type="radio" id="gender" name="gender" value="female">Female
+            </label>
+            <label class="radio-inline" style="margin-left: 2%;">
+              <input type="radio" id="gender" name="gender" value="male">Male
+            </label>
+          </div>
+          <button type="button" class="btn btn-primary" style="border: 1px solid #020531; border-radius: 3px;" onclick="register();">
+          <span class="fa fa-list-alt"></span> Register</button>
+        </form>
+        <button type="button" class="btn btn-primary" style="border: 1px solid #020531; border-radius: 3px;">
+            <span class="fa fa-download"></span> Download Admission Form</button>
+        <br>
+        <center>
+         
+          
+        </center>
+      </div>
+    </div>
+
+  </div>
+  </div> -->
+        <script>
+          function student() {
+            if (document.getElementById("neworold").value === "old") {
+              document.getElementById("stno").style.display = ""
+            } else {
+              document.getElementById("stno").style.display = "none"
+            }
+          }
+          for (var i = (new Date).getFullYear(); i >= 1905; i--) {
+            $("#year").append('<option value="' + i + '">' + i + '</option>');
+          }
+          for (var i = 31; i >= 1; i--) {
+            $("#day").append('<option value="' + i + '">' + i + '</option>');
+          }
+          var delay = 2000;
+          window.onload = function () {
+            setTimeout(myfunction, delay)
+            // document.getElementById("btn").click();
+
+          };
+
+          function myfunction() {
+            document.getElementById("btn").click();
+          }
+
+          function calculate_age(dob) {
+
+            var diff_ms = Date.now() - dob.getTime();
+            var age_dt = new Date(diff_ms);
+
+            return Math.abs(age_dt.getUTCFullYear() - 1970);
+          }
+
+          function agecalculator() {
+            var year = document.getElementById("year").value;
+            var month = document.getElementById("month").value;
+            var day = document.getElementById("day").value;
+            var age = document.getElementById("age");
+            var totalAge = calculate_age(new Date(year, month, day));
+            age.value = totalAge;
+            document.getElementById("age2").value = totalAge;
+
+          }
+        </script>

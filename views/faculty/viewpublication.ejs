@@ -1,0 +1,38 @@
+<% if(message && message.length >0){ %>
+    <div class="alert alert-warning alert-dismissible" style= "position: absolute;
+	top: 0px;
+	right: 1%;
+	height: 100px;
+	width: 400px;
+	z-index: 99;">
+        <button type="button" id="btn" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+
+        </button>
+        <%= message %>
+    </div>
+    <% } %>
+<% layout("layout") -%>
+  <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+    <div class="col-lg-12">
+      <% include ../partials/facultypanel %>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="container">
+      <div class="panel panel-info col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 80px; min-height:500px;">
+        <div class="panel-heading" style="color: #ffffff;">
+          <a href="/managepubs">Manage Publication</a> >> Publication # 2018-00000
+
+        </div>
+        <br>
+        <center>
+          <h3>
+            <span>Title</span>
+          </h3>
+        </center>
+
+        <h5>Content</h5>
+      </div>
+    </div>
+  </div>

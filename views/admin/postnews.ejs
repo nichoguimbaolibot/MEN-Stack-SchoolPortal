@@ -1,0 +1,77 @@
+<% if(message && message.length >0){ %>
+    <div class="alert alert-warning alert-dismissible" style= "position: absolute;
+	top: 0px;
+	right: 1%;
+	height: 100px;
+	width: 400px;
+	z-index: 99;">
+        <button type="button" id="btn" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+
+        </button>
+        <%= message %>
+    </div>
+    <% } %>
+<% layout("layout") -%>
+  <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+    <div class="col-lg-12">
+      <% include ../partials/adminpanel %>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="container">
+      <div class="panel panel-info col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 80px; height:730px;">
+        <div class="panel-heading" style="color: #ffffff;">
+
+          Post News and Announcement
+        </div>
+        <br>
+        <form action="/postnewsandannouncements" method="POST">
+          <div class="form-group" style="padding: 5px;">
+            <label for="postNumber" style="color:black; ">Post ID:</label>
+            <select name="postNumber" class="btn btn-info" style="border-radius:8px;" id="postNumber">
+              <option value="<%= (new Date()).getFullYear() %>00000<%= counter %>">
+                <%= (new Date()).getFullYear() %>00000
+                  <%= counter %>
+              </option>
+            </select>
+            <label for="usr" style="color:black;">Category:</label>
+            <select name="category" class="btn btn-info" style="border-radius:8px;" id="usr">
+              <option value="news">News</option>
+              <option value="announcement">Announcement</option>
+            </select>
+          </div>
+          <div class="form-group" style="padding: 5px;">
+            <label for="title" style="color:black;">Title:</label>
+            <input placeholder="Write the title...." type="text" name="title" class="form-control" id="title">
+          </div>
+          <div class="form-group" style="padding: 5px;">
+            <label for="content" style="color:black;">Content:</label>
+            <textarea style="width:100%; height: 400px;" placeholder="Write a content..." name="content" class="form-control" id="content"></textarea>
+          </div>
+
+          <div style="text-align: right;" style="padding: 5px;">
+            <button style="width: 100px;" class="btn btn-primary">
+              Post</button>
+            <button onClick="discard()" type="button" style="width: 100px; margin-right:5px;" class="btn btn-danger">
+              Discard</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <script>
+    function discard() {
+      document.getElementById("title").value = "";
+      document.getElementById("content").value = "";
+    }
+    // var dateScript = new Date();
+    // var thisYear = dateScript.getYear();
+    // $("#postNumber").append('<option value="' +  thisYear<%= counter %> + '">' + thisYear<%= counter %> + '</option>');
+
+  </script>

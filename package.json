@@ -1,0 +1,43 @@
+{
+  "name": "pbc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freelancershit/PBC.git"
+  },
+  "author": "nicho guimbaolibot",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/freelancershit/PBC/issues"
+  },
+  "homepage": "https://github.com/freelancershit/PBC#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.2",
+    "connect-mongo": "^2.0.1",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.9",
+    "ejs-mate": "^2.3.0",
+    "express": "^4.16.3",
+    "express-flash": "0.0.2",
+    "express-sanitizer": "^1.0.4",
+    "express-session": "^1.15.6",
+    "method-override": "^2.3.10",
+    "moment": "^2.22.1",
+    "mongoosastic": "^4.4.1",
+    "mongoose": "^5.0.15",
+    "morgan": "^1.9.0",
+    "multer": "^1.3.0",
+    "node-cmd": "^3.0.0",
+    "nodemailer": "^4.6.4",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  }
+}

@@ -1,0 +1,189 @@
+<% layout("layout") -%>
+  <div class="col-sm-3" style=" padding: 10px; margin-top: 70px;" overflow-x: hidden;>
+    <div class="col-lg-12">
+      <% include ../partials/studentpanel %>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="container">
+      <div class="panel panel-info  col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 78px;">
+        <div class="panel-heading" style="color: #ffffff;">Records of Grades:
+          <button style="display: none" id="btn" data-toggle="modal" href="#myModal">Open Modal</button>
+        </div>
+        <div class="form-group ">
+          <br>
+          <form action="/viewgrade" method="GET">
+            <select name="academicYear" class="btn btn-info">
+              <option>Choose a year...</option>
+              <% if(curriculums){ %>
+                <% curriculums.forEach(function(curriculum){ %>
+                  <option value="<%= curriculum.academicYear %>">
+                    <%= curriculum.academicYear %>
+                  </option>
+                  <% }); %>
+                    <% } %>
+            </select>
+            <button class="btn btn-info">Find</button>
+          </form>
+        </div>
+        <br>
+
+
+        <div class="table-responsive">
+          <div style="overflow-y: scroll; height:350px; ">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <% if(curriculum){ %>
+                    <% if(!(curriculum.yrLvl == "grade11" || curriculum.yrLvl =="grade12")){ %>
+                      <th style="color: #ffffff; background-color: #020531;">Subject </th>
+                      <th style="color: #ffffff; background-color: #020531;">1st Grading</th>
+                      <th style="color: #ffffff; background-color: #020531;">2nd Grading</th>
+                      <th style="color: #ffffff; background-color: #020531;">3rd Grading</th>
+
+                      <th style="color: #ffffff; background-color: #020531;">4th Grading</th>
+
+                      <th style="color: #ffffff; background-color: #020531;">Final Grade</th>
+
+                      <th style="color: #ffffff; background-color: #020531;">Remark</th>
+                      <% }else{ %>
+                        <th style="color: #ffffff; background-color: #020531;">Subject </th>
+                        <th style="color: #ffffff; background-color: #020531;">First Semester</th>
+                        <th style="color: #ffffff; background-color: #020531;">Second Semester</th>
+
+                        <% } %>
+                          <% } %>
+                </tr>
+              </thead>
+              <tbody>
+                <% if(curriculum){ %>
+                  <% if(!(curriculum.yrLvl =="grade11" || curriculum.yrLvl == "grade12")){ %>
+                    <% curriculum.subjects.forEach(function(subject){ %>
+
+                      <tr>
+                        <td style="text-transform: uppercase; font-weight: bold">
+                          <%= subject.subject %>
+                        </td>
+                        <% if(subject.firstGrading == 0){ %>
+                          <td>&nbsp</td>
+                          <% } else {%>
+                            <% if(subject.postFirstGrading == true){ %>
+                              <td>
+                                <%= subject.firstGrading %>
+                              </td>
+                              <% } %>
+                                <% }; %>
+                                  <% if(subject.secondGrading == 0){ %>
+                                    <td>&nbsp</td>
+                                    <% } else {%>
+                                      <% if(subject.postSecondGrading == true){ %>
+                                        <td>
+                                          <%= subject.secondGrading %>
+                                        </td>
+                                        <% } %>
+                                          <% }; %>
+                                            <% if(subject.thirdGrading == 0){ %>
+                                              <td>&nbsp</td>
+                                              <% } else {%>
+                                                <% if(subject.postThirdGrading == true){ %>
+                                                  <td>
+                                                    <%= subject.thirdGrading %>
+                                                  </td>
+                                                  <% } %>
+                                                    <% }; %>
+                                                      <% if(subject.fourthGrading == 0){ %>
+                                                        <td>&nbsp</td>
+                                                        <% } else {%>
+                                                          <% if(subject.postFourthGrading == true){ %>
+                                                            <td>
+                                                              <%= subject.fourthGrading %>
+                                                            </td>
+                                                            <% } %>
+                                                              <% }; %>
+                                                                <% if(subject.fourthGrading == 0){ %>
+                                                                  <td>&nbsp</td>
+                                                                  <% } else {%>
+                                                                    <td>
+                                                                      <%= (parseFloat(subject.firstGrading) + parseFloat(subject.secondGrading) + parseFloat(subject.thirdGrading) + parseFloat(subject.fourthGrading)) /4  %>
+                                                                    </td>
+                                                                    <% }; %>
+                                                                      <% if(subject.fourthGrading == 0){ %>
+                                                                        <td>&nbsp</td>
+                                                                        <% } else {%>
+                                                                          <% if((parseFloat(subject.firstGrading) + parseFloat(subject.secondGrading) + parseFloat(subject.thirdGrading) + parseFloat(subject.fourthGrading)) /4 >= 75){ %>
+                                                                            <td>Passed!</td>
+                                                                            <% } else {%>
+                                                                              <td>Failed!</td>
+                                                                              <% }; %>
+                                                                                <% }; %>
+                      </tr>
+                      <% }); %>
+                        <% }else{ %>
+                          <% curriculum.subjects.forEach(function(subject){ %>
+                            <tr>
+                              <td style="text-transform: uppercase; font-weight: bold">
+                                <%= subject.subject %>
+                              </td>
+
+                              <% if(subject.firstSem === 0){ %>
+                                <td></td>
+                                <% } else {%>
+                                  <% if(subject.postFirstSem == true){ %>
+                                    <td>
+                                      <%= subject.firstSem %>
+                                    </td>
+                                    <% } %>
+                                      <% }; %>
+                                        <% if(subject.secondSem === 0){ %>
+                                          <td></td>
+                                          <% } else {%>
+                                            <% if(subject.postSecondSem == true){ %>
+                                              <td>
+                                                <%= subject.secondSem %>
+                                              </td>
+                                              <% } %>
+                                                <% }; %>
+                                                  <tr>
+                                                    <% }); %>
+                                                      <% } %>
+                                                        <% } else if(!curriculum){ %>
+                                                          <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Student Status</h4>
+        </div>
+        <div class="modal-body">
+          <h3>
+            <span>
+              You are not yet Enrolled in any curriculum!
+            </span>
+          </h3>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script>
+    window.onload = function () {
+      <% if (!curriculum) { %>
+      document.getElementById("btn").click();
+      <% } %>
+    };
+  </script>

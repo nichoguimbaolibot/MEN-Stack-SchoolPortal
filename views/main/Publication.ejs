@@ -1,0 +1,91 @@
+<% layout("layout") -%>
+  <% include ../partials/Carousel %>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">
+            Publication
+          </h1>
+          <br>
+        </div>
+        <div class="container">
+          <div class="panel panel-info  col-sm-12" id="myScrollspy" style="padding: 0px; margin-top: 80px; height:460px;">
+
+            <div class="panel-heading" style="color: #ffffff;">List of Publication</div>
+            <br>
+            <div class="table-responsive">
+              <div style="overflow-y: scroll; height:350px; ">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th style="color: #ffffff; background-color: #020531;">Name</th>
+                      <th style="color: #ffffff; background-color: #020531;">Title</th>
+                      <th style="color: #ffffff; background-color: #020531;">Type</th>
+                      <th style="color: #ffffff; background-color: #020531;">Date Created</th>
+                      <th style="color: #ffffff; background-color: #020531;">Action</th>
+                    </tr>
+                  </thead>
+                  <% literaries.forEach(function(literary){ %>
+                    <tr>
+                      <td style="text-transform: uppercase;">
+                        <%= literary.lastName %>,
+                          <%= literary.firstName %>
+                            <%= literary.middleName %>
+                      </td>
+
+                      <td>
+                        <%= literary.title %>
+                      </td>
+
+
+                      <td>
+                        <%= literary.category %>
+                      </td>
+
+                      <td>
+                        <%= moment(literary.publishDate).format("LL") %>
+                      </td>
+
+                      <td>
+                        <button data-toggle="modal" data-target="#<%= literary._id %>">
+                          <i class="fa fa-eye" aria-hidden="true" style="color:black;"></i>
+                        </button>
+                      </td>
+                      <!-- modal -->
+                      <div class="modal fade" id="<%= literary._id %>" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h3 class="modal-title">
+                                <%= literary.title %>
+                                  </h4>
+                                  <h5 class="modal-title">
+                                    <%= moment(literary.publishDate).format("LL") %>
+                                  </h5>
+                            </div>
+                            <div class="modal-body">
+                              <span>
+                                <%- literary.content %>
+                              </span>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+              </div>
+
+              </tr>
+              <% }); %>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>

@@ -1,0 +1,587 @@
+<% if(message.length >0){ %>
+    <div class="alert alert-warning alert-dismissible" style="position: absolute;
+	top: 0px;
+	right: 1%;
+	height: 100px;
+	width: 400px;
+	z-index: 99;">
+        <button type="button" id="btn" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+
+        </button>
+        <%= message %>
+    </div>
+    <% } %>
+
+
+        <% layout("layout") -%>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4"></div>
+                    <div class="col-lg-4 col-md-4">
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+                <div class="col-lg-12">
+                    <% include ../partials/adminpanel %>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="container">
+                    <div class="panel panel-info  col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 80px; min-height:485px;">
+
+                        <div class="panel-heading" style="color: #ffffff;">Manage Faculty
+                            <b style="float: right;">
+                                <%= users.profile.name %>
+                            </b>
+                        </div>
+
+
+                        <div class="container ">
+                            <div class="dropdown " style="margin-top:5px; margin-left: -10px; ">
+
+                                <ul class="dropdown-menu ">
+                                    <li>
+                                        <a href="# ">Subject</a>
+                                    </li>
+                                    <li>
+                                        <a href="# ">Year</a>
+                                    </li>
+                                    <li>
+                                        <a href="# ">Section</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                        <br>
+                        <div class="table-responsive">
+                            <div style="overflow-y: scroll; height:270px; ">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th style="color: #ffffff; background-color: #020531;">Subject</th>
+                                            <th style="color: #ffffff; background-color: #020531;">Year Level</th>
+                                            <th style="color: #ffffff; background-color: #020531;">Section</th>
+                                            <th style="color: #ffffff; background-color: #020531;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <% if( users.faculty){ %>
+                                        <% users.faculty.forEach(function(faculty){ %>
+                                            <tr>
+                                                <td>
+                                                    <%= faculty.subject %>
+                                                </td>
+                                                <td>
+                                                    <%= faculty.yrLvl %>
+                                                </td>
+                                                <td>
+                                                    <%= faculty.section %>
+                                                </td>
+                                                <form action="/manage-faculty/<%= faculty._id %>?_method=DELETE" method="POST">
+                                                    <td>
+                                                        <button class="btn btn-info btn-sm">DELETE</button>
+                                                    </td>
+                                                </form>
+                                            </tr>
+                                            <% }); %>
+                                                <% } %>
+                                </table>
+
+                            </div>
+                        </div>
+
+
+                        <div class="panel-heading" style="color: #ffffff;">Add Subject Load</div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <br>
+                                <form action="/manage-faculty/<%= users._id %>?_method=PUT" method="POST">
+                                <% if(users.publisher == "true" || users.publisher == true){ %>
+                                        <input type="hidden" name="publisher" value="true" />
+                                        <button class="btn btn-info">Disable Editor</button>
+                                    <% }else{ %>
+                                            <input type="hidden" name="publisher" value="false" />
+                                            <button class="btn btn-info">Enable Editor</button>
+                                        <% } %>
+                                        </form>                                        
+                            </div>
+                            <div class="col-sm-6">
+                                <br>
+                                <div class="form-group">
+                                    <label for="">Department </label>
+                                    <br>
+                                    <select onChange="departments()" id="departmental" class="form-control">
+
+                                        <option value="" disabled selected>Select your option</option>
+                                        <option value="elem">Elementary</option>
+                                        <option value="jr">Junior High School</option>
+                                        <option value="sr">Senior High School</option>
+                                    </select>
+                                </div>
+                                <form action="/manage-faculty/<%= users._id %>" method="POST">
+
+                                    <div class="form-group">
+                                        <label for="">Year Level: </label>
+                                        <br>
+                                        <select onChange="generateTable()" id="yrLvl" name="yrLvl" class="form-control">
+
+                                            <option value="" disabled selected>Select your option</option>
+                                            <option id="1" value="grade1">Grade 1</option>
+                                            <option id="2" value="grade2">Grade 2</option>
+                                            <option id="3" value="grade3">Grade 3</option>
+                                            <option id="4" value="grade4">Grade 4</option>
+                                            <option id="5" value="grade5">Grade 5</option>
+                                            <option id="6" value="grade6">Grade 6</option>
+                                            <option id="7" value="grade7">Grade 7</option>
+                                            <option id="8" value="grade8">Grade 8</option>
+                                            <option id="9" value="grade9">Grade 9</option>
+                                            <option id="10" value="grade10">Grade 10</option>
+                                            <option id="11" value="grade11">Grade 11</option>
+                                            <option id="12" value="grade12">Grade 12</option>
+                                        </select>
+                                    </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <br>
+                                <div class="form-group">
+                                    <label for="">Section: </label>
+                                    <br>
+                                    <div id="section">
+                                        <select onchange="generate()" id="section1" name="section" class="form-control">
+                                            <option value="joy">Joy</option>
+                                            <option value="love">Love</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Subject: </label>
+                                    <br>
+                                    <select class="form-control" id="subj" name="subject">
+                                        <option id="math" value="math">Math</option>
+                                        <option id="science" value="science">Science</option>
+                                        <option id="english" value="english">English</option>
+                                        <option id="filipino" value="filipino">Filipino</option>
+                                        <option id="EP" value="edukasyon sa pag papakatao">Edukasyon sa Pagpapakatao</option>
+                                        <option id="AP" value="araling panlipunan">Araling Panlipunan</option>
+                                        <option id="MAPEH" value="mapeh">MAPEH</option>
+                                        <option id="Comp" value="computer">Computer</option>
+                                        <option id="TLE" value="TLE">TLE(Technology and Livelihood Education)</option>
+                                        <option id="EPP" value="Edukasyong Pantahanan at Pangkabuhayan">Edukasyong Pantahanan at Pangkabuhayan</option>
+                                    </select>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <button id="btn" style="color:black" onmouseover="over()" onmouseout="out()" disabled class="form-control btn-info">SAVE</button>
+                            </div>
+                        </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            <script>
+                function over() {
+                    var btn = document.getElementById("btn");
+                    btn.style.color = "black"
+                }
+
+                function out() {
+                    var btn = document.getElementById("btn");
+                    btn.style.color = "white"
+                }
+
+                function departments() {
+                    var value = document.getElementById("departmental").value;
+                    var grade1 = document.getElementById("1");
+                    var grade2 = document.getElementById("2");
+                    var grade3 = document.getElementById("3");
+                    var grade4 = document.getElementById("4");
+                    var grade5 = document.getElementById("5");
+                    var grade6 = document.getElementById("6");
+                    var grade7 = document.getElementById("7");
+                    var grade8 = document.getElementById("8");
+                    var grade9 = document.getElementById("9");
+                    var grade10 = document.getElementById("10");
+                    var grade11 = document.getElementById("11");
+                    var grade12 = document.getElementById("12");
+
+                    if (document.getElementById("departmental").value === "elem") {
+
+                        grade1.disabled = false;
+                        grade2.disabled = false;
+                        grade3.disabled = false;
+                        grade4.disabled = false;
+                        grade5.disabled = false;
+                        grade6.disabled = false;
+                        grade7.disabled = true;
+                        grade8.disabled = true;
+                        grade9.disabled = true;
+                        grade10.disabled = true;
+                        grade11.disabled = true;
+                        grade12.disabled = true;
+                    } else if (document.getElementById("departmental").value === "jr") {
+
+                        grade1.disabled = true;
+                        grade2.disabled = true;
+                        grade3.disabled = true;
+                        grade4.disabled = true;
+                        grade5.disabled = true;
+                        grade6.disabled = true;
+                        grade7.disabled = false;
+                        grade8.disabled = false;
+                        grade9.disabled = false;
+                        grade10.disabled = false;
+                        grade11.disabled = true;
+                        grade12.disabled = true;
+                    } else {
+
+                        grade1.disabled = true;
+                        grade2.disabled = true;
+                        grade3.disabled = true;
+                        grade4.disabled = true;
+                        grade5.disabled = true;
+                        grade6.disabled = true;
+                        grade7.disabled = true;
+                        grade8.disabled = true;
+                        grade9.disabled = true;
+                        grade10.disabled = true;
+                        grade11.disabled = false;
+                        grade12.disabled = false;
+                    }
+
+                }
+
+
+                var delay = 2000;
+                window.onload = function () {
+                    setTimeout(myfunction, delay)
+                    // document.getElementById("btn").click();
+
+                };
+
+                function myfunction() {
+                    document.getElementById("btn").click();
+                }
+
+                function generateTable() {
+                    var value = document.getElementById("yrLvl").value;
+                    var math = document.getElementById("math");
+                    var science = document.getElementById("science");
+                    var english = document.getElementById("english");
+                    var filipino = document.getElementById("filipino");
+                    var EP = document.getElementById("EP");
+                    var AP = document.getElementById("AP");
+                    var MAPEH = document.getElementById("MAPEH");
+                    var Comp = document.getElementById("Comp");
+                    var TLE = document.getElementById("TLE");
+                    var EPP = document.getElementById("EPP");
+                    var btn = document.getElementById("btn");
+
+                    console.log(value);
+                    if (value === "grade1") {
+                        $("#subj").empty();
+                        $("#subj").append(
+                            '<option id="math" value="math">Math</option><option id="english" value="english">English</option><option id="filipino" value="filipino">Filipino</option><option id="EP" value="edukasyon sa pag papakatao">Edukasyon sa Pagpapakatao</option><option id="AP" value="araling panlipunan">Araling Panlipunan</option><option id="MAPEH" value="mapeh">MAPEH</option><option id="Comp" value="computer">Computer</option>'
+                        );
+                        $("#section1").empty();
+                        $("#section1").append('<option value="joy">Joy</option><option value="love">Love</option>');
+                        c
+                        btn.style.color = "white";
+
+
+                    } else if (value === "grade2") {
+                        $("#subj").empty();
+                        $("#subj").append(
+                            '<option id="math" value="math">Math</option><option id="english" value="english">English</option><option id="filipino" value="filipino">Filipino</option><option id="EP" value="edukasyon sa pag papakatao">Edukasyon sa Pagpapakatao</option><option id="AP" value="araling panlipunan">Araling Panlipunan</option><option id="MAPEH" value="mapeh">MAPEH</option><option id="Comp" value="computer">Computer</option>'
+                        );
+                        $("#section1").empty();
+                        $("#section1").append(
+                            '<option value="honor">Honor</option><option value="unity">Unity</option>');
+
+                        btn.disabled = false
+                    } else if (value === "grade3") {
+                        $("#subj").empty();
+                        $("#subj").append(
+                            '<option id="math" value="math">Math</option><option id="science" value="science">Science</option><option id="english" value="english">English</option><option id="filipino" value="filipino">Filipino</option><option id="EP" value="edukasyon sa pag papakatao">Edukasyon sa Pagpapakatao</option><option id="AP" value="araling panlipunan">Araling Panlipunan</option><option id="MAPEH" value="mapeh">MAPEH</option><option id="Comp" value="computer">Computer</option>'
+                        );
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="kindness">Kindness</option>' +
+                                '<option value="faith">Faith</option>' +
+                                '<option value="helpfulness">Helpfulness</option>'
+                            );
+
+
+                        btn.disabled = false
+
+                    } else if (value === "grade4") {
+                        $("#subj").empty();
+                        $("#subj").append(
+                            '<option id="math" value="math">Math</option><option id="science" value="science">Science</option><option id="english" value="english">English</option><option id="filipino" value="filipino">Filipino</option><option id="EP" value="edukasyon sa pag papakatao">Edukasyon sa Pagpapakatao</option><option id="AP" value="araling panlipunan">Araling Panlipunan</option><option id="MAPEH" value="mapeh">MAPEH</option><option id="Comp" value="computer">Computer</option><option id="EPP" value="EPP">EPP</option>'
+                        );
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="generosity">Generosity</option>' +
+                                '<option value="charity">Charity</option>'
+                            );
+
+
+                        btn.disabled = false
+                    } else if (value === "grade5") {
+                        $("#subj").empty();
+                        $("#subj").append(
+                            '<option id="math" value="math">Math</option><option id="science" value="science">Science</option><option id="english" value="english">English</option><option id="filipino" value="filipino">Filipino</option><option id="EP" value="edukasyon sa pag papakatao">Edukasyon sa Pagpapakatao</option><option id="AP" value="araling panlipunan">Araling Panlipunan</option><option id="MAPEH" value="mapeh">MAPEH</option><option id="Comp" value="computer">Computer</option><option id="EPP" value="EPP">EPP</option>'
+                        );
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="cooperate">Cooperate</option>' +
+                                '<option value="punctuality">Punctuality</option>'
+                            );
+
+
+                        btn.disabled = false
+                    } else if (value === "grade6") {
+                        $("#subj").empty();
+                        $("#subj").append(
+                            '<option id="math" value="math">Math</option><option id="science" value="science">Science</option><option id="english" value="english">English</option><option id="filipino" value="filipino">Filipino</option><option id="EP" value="edukasyon sa pag papakatao">Edukasyon sa Pagpapakatao</option><option id="AP" value="araling panlipunan">Araling Panlipunan</option><option id="MAPEH" value="mapeh">MAPEH</option><option id="Comp" value="computer">Computer</option><option id="EPP" value="EPP">EPP</option>'
+                        );
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="courage">Courage</option>' +
+                                '<option value="responsibility">Responsibiliy</option>'
+                            );
+
+
+                        btn.disabled = false
+                    } else if (value === "grade7") {
+                        $("#subj").empty();
+                        $("#subj").append(
+                            '<option id="math" value="math">Math</option><option id="science" value="science">Science</option><option id="english" value="english">English</option><option id="filipino" value="filipino">Filipino</option><option id="EP" value="edukasyon sa pag papakatao">Edukasyon sa Pagpapakatao</option><option id="AP" value="araling panlipunan">Araling Panlipunan</option><option id="MAPEH" value="mapeh">MAPEH</option><option id="Comp" value="computer">Computer</option><option id="EPP" value="EPP">EPP</option>'
+                        );
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="faithfulness">Faithfulness</option>' +
+                                '<option value="obedience">Obedience</option>' +
+                                '<option value="humility">Humility</option>' +
+                                '<option value="patience">Patience</option>' +
+                                '<option value="frugality">Frugality</option>'
+                            );
+
+                        btn.disabled = false
+                    } else if (value === "grade8") {
+                        $("#subj").empty();
+                        $("#subj").append(
+                            '<option id="math" value="math">Math</option><option id="science" value="science">Science</option><option id="english" value="english">English</option><option id="filipino" value="filipino">Filipino</option><option id="EP" value="edukasyon sa pag papakatao">Edukasyon sa Pagpapakatao</option><option id="AP" value="araling panlipunan">Araling Panlipunan</option><option id="MAPEH" value="mapeh">MAPEH</option><option id="Comp" value="computer">Computer</option><option id="TLE" value="TLE">TLE(Technology and Livelihood Education)</option><option id="EPP" value="Edukasyong Pantahanan at Pangkabuhayan">Edukasyong Pantahanan at Pangkabuhayan</option>'
+                        );
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="gratitude">Gratitude</option>' +
+                                '<option value="solidarity">Solidarity</option>' +
+                                '<option value="compassion">Compassion</option>' +
+                                '<option value="fortitude">Fortitude</option>' +
+                                '<option value="perseverance">Perseverance</option>'
+                            );
+
+
+                        btn.disabled = false
+                    } else if (value === "grade9") {
+                        $("#subj").empty();
+                        $("#subj").append(
+                            '<option id="math" value="math">Math</option><option id="science" value="science">Science</option><option id="english" value="english">English</option><option id="filipino" value="filipino">Filipino</option><option id="EP" value="edukasyon sa pag papakatao">Edukasyon sa Pagpapakatao</option><option id="AP" value="araling panlipunan">Araling Panlipunan</option><option id="MAPEH" value="mapeh">MAPEH</option><option id="Comp" value="computer">Computer</option><option id="TLE" value="TLE">TLE(Technology and Livelihood Education)</option><option id="EPP" value="Edukasyong Pantahanan at Pangkabuhayan">Edukasyong Pantahanan at Pangkabuhayan</option>'
+                        );
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="dignity">Dignity</option>' +
+                                '<option value="sincerity">Sincerity</option>' +
+                                '<option value="serenity">Serenity</option>' +
+                                '<option value="diligence">Diligence</option>'
+                            );
+
+
+                        btn.disabled = false
+                    } else if (value === "grade10") {
+                        $("#subj").empty();
+                        $("#subj").append(
+                            '<option id="math" value="math">Math</option><option id="science" value="science">Science</option><option id="english" value="english">English</option><option id="filipino" value="filipino">Filipino</option><option id="EP" value="edukasyon sa pag papakatao">Edukasyon sa Pagpapakatao</option><option id="AP" value="araling panlipunan">Araling Panlipunan</option><option id="MAPEH" value="mapeh">MAPEH</option><option id="Comp" value="computer">Computer</option><option id="TLE" value="TLE">TLE(Technology and Livelihood Education)</option><option id="EPP" value="Edukasyong Pantahanan at Pangkabuhayan">Edukasyong Pantahanan at Pangkabuhayan</option>'
+                        );
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="prudence">Prudence</option>' +
+                                '<option value="leadership">Leadership</option>' +
+                                '<option value="knowledge">Knowledge</option>' +
+                                '<option value="wisdom">Wisdom</option>'
+                            );
+
+                        btn.disabled = false
+
+                    } else if (value === "grade11") {
+
+                        btn.disabled = false;
+
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="Sciences Technology Engineering and Mathematics">Sciences Technology Engineering and Mathematics</option>' +
+                                '<option value="Accountancy">Accountancy</option>' +
+                                '<option value="Business Management">Business Management</option>' +
+                                '<option value="Humanities and Social Sciences">Humanities and Social Sciences</option>' +
+                                '<option value="Information and Communication Technology">Information and Communication Technology</option>' +
+                                '<option value="Home Economics">Home Economics</option>'
+                            );
+                        generate();
+                    } else if (value === "grade12") {
+
+                        btn.disabled = false;
+
+                        $("#section1").empty();
+                        $("#section1")
+                            .append(
+                                '<option value="Sciences Technology Engineering and Mathematics">Sciences Technology Engineering and Mathematics</option>' +
+                                '<option value="Accountancy">Accountancy</option>' +
+                                '<option value="Business Management">Business Management</option>' +
+                                '<option value="Humanities and Social Sciences">Humanities and Social Sciences</option>' +
+                                '<option value="Information and Communication Technology">Information and Communication Technology</option>' +
+                                '<option value="Home Economics">Home Economics</option>'
+                            );
+                        generate();
+                    }
+                }
+
+                function generate() {
+                    var section1 = document.getElementById("section1").value;
+                    if (section1 === "Sciences Technology Engineering and Mathematics") {
+                        $("#subj").empty();
+                        $("#subj").append("<option value='Earth Science'>Earth Science</option>");
+                        $("#subj").append("<option value='General Mathematics'>General Mathematics</option>");
+                        $("#subj").append(
+                            "<option value='Komunikasyon sa Pananaliksik sa Wika at Kulturang Pilipino'>Komunikasyon sa Pananaliksik sa Wika at Kulturang Pilipino</option>"
+                        );
+                        $("#subj").append("<option value='Oral Communication'>Oral Communication</option>");
+                        $("#subj").append(
+                            "<option value='Personal Development o Pansariling Kaunlaran'>Personal Development o Pansariling Kaunlaran</option>"
+                        );
+                        $("#subj").append(
+                            "<option value='Physical Education and Health'>Physical Education and Health</option>");
+                        $("#subj").append(
+                            "<option value='English for Academic and Professional Purposes'>English for Academic and Professional Purposes</option>"
+                        );
+                        $("#subj").append("<option value='General Chemistry 1'>General Chemistry 1</option>");
+                        $("#subj").append("<option value='Pre Calculus'>Pre Calculus</option>");
+                    } else if (section1 === "Accountancy") {
+                        $("#subj").empty();
+                        $("#subj").append(
+                            "<option value='21st Century Literature from the Philippines and the World'>21st Century Literature from the Philippines and the World</option>"
+                        );
+                        $("#subj").append(
+                            "<option value='Understanding Culture, Society and Politics'>Understanding Culture, Society and Politics</option>"
+                        );
+                        $("#subj").append("<option value='Physical Science'>Physical Science</option>");
+                        $("#subj").append(
+                            "<option value='Physical Education and Health'>Physical Education and Health</option>");
+                        $("#subj").append("<option value='Empowerment Technologies'>Empowerment Technologies</option>");
+                        $("#subj").append("<option value='Practical Research 2'>Practical Research 2</option>");
+                        $("#subj").append("<option value='Entrepreneurship'>Entrepreneurship</option>");
+                        $("#subj").append("<option value='Business Mathematics'>Business Mathematics</option>");
+                    } else if (section1 === "Business Management") {
+                        $("#subj").empty();
+                        $("#subj").append(
+                            "<option value='21st Century Literature from the Philippines and the World'>21st Century Literature from the Philippines and the World</option>"
+                        );
+                        $("#subj").append(
+                            "<option value='Understanding Culture, Society and Politics'>Understanding Culture, Society and Politics</option>"
+                        );
+                        $("#subj").append("<option value='Physical Science'>Physical Science</option>");
+                        $("#subj").append(
+                            "<option value='Physical Education and Health'>Physical Education and Health</option>");
+                        $("#subj").append("<option value='Empowerment Technologies'>Empowerment Technologies</option>");
+                        $("#subj").append("<option value='Practical Research 2'>Practical Research 2</option>");
+                        $("#subj").append("<option value='Entrepreneurship'>Entrepreneurship</option>");
+                        $("#subj").append("<option value='Business Mathematics'>Business Mathematics</option>");
+                    } else if (section1 === "Humanities and Social Sciences") {
+                        $("#subj").empty();
+                        $("#subj").append("<option value='Reading and Writing'>Reading and Writing</option>");
+                        $("#subj").append(
+                            "<option value='Pagbasa at Pagsusuri ng Ibat Ibang Teksto Tungo sa Pananaliksik'>Pagbasa at Pagsusuri ng Ibat Ibang Teksto Tungo sa Pananaliksik</option>"
+                        );
+                        $("#subj").append(
+                            "<option value='Statistics and Probability'>Statistics and Probability</option>");
+                        $("#subj").append(
+                            "<option value='Physical Education and Health'>Physical Education and Health</option>");
+                        $("#subj").append(
+                            "<option value='Filipino sa Piling Larangan'>Filipino sa Piling Larangan</option>");
+                        $("#subj").append("<option value='Practical Research 1'>Practical Research 1</option>");
+                        $("#subj").append(
+                            "<option value='Disciplines and Ideas in the Social Sciences'>Disciplines and Ideas in the Social Sciences</option>"
+                        );
+                        $("#subj").append(
+                            "<option value='Creative Non-Fiction: The Literacy Essay'>Creative Non-Fiction: The Literacy Essay</option>"
+                        );
+                    } else if (section1 === "Information and Communication Technology") {
+                        $("#subj").empty();
+                        $("#subj").append("<option value='Reading and Writing'>Reading and Writing</option>");
+                        $("#subj").append(
+                            "<option value='Pagbasa at Pagsusuri ng Ibat Ibang Teksto Tungo sa Pananaliksik'>Pagbasa at Pagsusuri ng Ibat Ibang Teksto Tungo sa Pananaliksik</option>"
+                        );
+                        $("#subj").append(
+                            "<option value='Statistics and Probability'>Statistics and Probability</option>");
+                        $("#subj").append(
+                            "<option value='Physical Education and Health'>Physical Education and Health</option>");
+                        $("#subj").append(
+                            "<option value='Filipino sa Piling Larangan'>Filipino sa Piling Larangan</option>");
+                        $("#subj").append("<option value='Practical Research 1'>Practical Research 1</option>");
+                        $("#subj").append(
+                            "<option value='Computer System Servicing'>Computer System Servicing</option>");
+                    } else if (section1 === "Home Economics") {
+                        $("#subj").empty();
+                        $("#subj").append(
+                            "<option value='Contemporary Philippine Arts from the Regions'>Contemporary Philippine Arts from the Regions</option>"
+                        );
+                        $("#subj").append(
+                            "<option value='Introduction to the Philosophy of the Human Person o Pambungad sa Pilosopiya ng Tao'>Introduction to the Philosophy of the Human Person o Pambungad sa Pilosopiya ng Tao</option>"
+                        );
+                        $("#subj").append("<option value='Entrepreneurship'>Entrepreneurship</option>");
+                        $("#subj").append(
+                            "<option value='Physical Education and Health'>Physical Education and Health</option>");
+                        $("#subj").append(
+                            "<option value='Inquiries, Investigations and Immersions'>Inquiries, Investigations and Immersions</option>"
+                        );
+                        $("#subj").append(
+                            "<option value='Bread and Pastry Production'>Bread and Pastry Production</option>");
+                        $("#subj").append("<option value='Work Immersion'>Work Immersion</option>");
+                    }
+
+
+
+                }
+            </script>

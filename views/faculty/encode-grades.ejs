@@ -1,0 +1,306 @@
+<% if(message && message.length >0){ %>
+    <div class="alert alert-warning alert-dismissible" style="position: absolute;
+	top: 0px;
+	right: 1%;
+	height: 100px;
+	width: 400px;
+	z-index: 99;">
+        <button type="button" id="btn" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+
+        </button>
+        <%= message %>
+    </div>
+    <% } %>
+        <% layout("layout") -%>
+            <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+                <div class="col-lg-12">
+                    <% include ../partials/facultypanel %>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="container">
+                    <div class="panel panel-info  col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 80px; height:460px;">
+
+                        <div class="panel-heading" style="color: #ffffff;">Encode Student Grades
+                            <div style="float: right;">
+                                <%if(yrLvl === "grade11" || yrLvl === "grade12"){ %>
+                                    <% if (handle[0].firstSemester == true || handle[0].firstSemester == "true") { %>
+                                        First Semenster
+                                        <% } else if (handle[0].secondSemester == true || handle[0].secondSemester == "true") { %>
+                                            Second Semester
+
+                                            <% } %>
+                                                <% } else { %>
+                                                    <% if (handle[0].first == true  || handle[0].first == "true") { %>
+                                                        First Grading
+                                                        <% } else if (handle[0].second == true || handle[0].second == "true") { %>
+                                                            Second Grading
+                                                            <% } else if (handle[0].third == true || handle[0].third == "true") { %>
+                                                                Third Grading
+                                                                <% } else if (handle[0].fourth == true || handle[0].third == "fourth"){ %>
+                                                                    Fourth Grading
+                                                                    <% } else { %>
+                                                                        <% } %>
+
+                                                                            <% } %>
+                            </div>
+                        </div>
+                        <div class="container ">
+                            <br>
+                            <label for="usr " style="margin-left: 5px; ">Year:
+                                <br>
+                                <strong>
+                                    <%= yrLvl %>
+                                </strong>
+                            </label>
+                            <label for="usr " style="margin-left: 55px; ">Section:
+                                <br>
+                                <strong>
+                                    <%= section %>
+                                </strong>
+                            </label>
+                            <label for="usr " style="margin-left: 30px; ">Subject:
+                                <br>
+                                <strong>
+                                    <%= subject %>
+                                </strong>
+                            </label>
+                            <br>
+                        </div>
+
+
+                        <br>
+                        <div class="table-responsive">
+                            <div style="overflow-y: scroll; height:330px; ">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <tr>
+                                                <% if(yrLvl === "grade11" || yrLvl === "grade12"){ %>
+                                                    <th style="color: #ffffff; background-color: #020531;">Student </th>
+                                                    <th style="color: #ffffff; background-color: #020531;">First Semester</th>
+                                                    <th style="color: #ffffff; background-color: #020531;">Second Semester</th>
+                                                    <% }else{ %>
+                                                        <th style="color: #ffffff; background-color: #020531;">Student </th>
+                                                        <th style="color: #ffffff; background-color: #020531;">1st Grading</th>
+                                                        <th style="color: #ffffff; background-color: #020531;">2nd Grading</th>
+                                                        <th style="color: #ffffff; background-color: #020531;">3rd Grading</th>
+                                                        <th style="color: #ffffff; background-color: #020531;">4th Grading</th>
+
+                                                        <th style="color: #ffffff; background-color: #020531;">Final Grading</th>
+                                                        <th style="color: #ffffff; background-color: #020531;">Remark</th>
+                                                        <% } %>
+                                            </tr>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <form id="encodePost" action="/encode-grades" method="POST">
+                                            <input type="hidden" name="yrLvl" value="<%= yrLvl %>" />
+                                            <input type="hidden" name="toggle" id="toggle" />
+                                            <%if(!(yrLvl === "grade11" || yrLvl === "grade12")){ %>
+                                                <% handle.forEach(function(subject){ %>
+                                                    <tr>
+                                                        <input type="hidden" value="<%= subject._id %>" name="id[]" />
+                                                        <td>
+                                                            <%= subject.lastName %>,
+                                                                <%= subject.firstName %>
+                                                                    <%= subject.middleName %>
+                                                        </td>
+                                                        <td>
+                                                            <% if(subject.first == true || subject.first == "true"){ %>
+                                                                <input id="first" value="<%= subject.firstGrading %>" maxlength="2" oninput="numberOnly(this.id);" size="2" name="firstGrading[]"
+                                                                    type="text" min="0" max="100" style="width:60px;" class="form-control">
+                                                                <%} else{ %>
+                                                                    <input disabled id="first" value="<%= subject.firstGrading %>" maxlength="2" oninput="numberOnly(this.id);" size="2" name="firstGrading[]"
+                                                                        type="text" min="0" max="100" style="width:60px;" class="form-control">
+                                                                    <% } %>
+                                                        </td>
+                                                        <td>
+                                                            <% if(subject.second == true || subject.second == "true"){ %>
+                                                                <input id="second" value="<%= subject.secondGrading %>" name="secondGrading[]" type="text" min="0" max="100" maxlength="2"
+                                                                    oninput="numberOnly(this.id);" style="width:60px" class="form-control">
+                                                                <% }else{ %>
+                                                                    <input disabled id="second" value="<%= subject.secondGrading %>" name="secondGrading[]" type="text" min="0" max="100" maxlength="2"
+                                                                        oninput="numberOnly(this.id);" style="width:60px" class="form-control">
+                                                                    <% } %>
+                                                        </td>
+                                                        <td>
+                                                            <% if(subject.third == true || subject.third == "true"){ %>
+                                                                <input id="third" value="<%= subject.thirdGrading %>" name="thirdGrading[]" type="text" min="0" max="100" maxlength="2" oninput="numberOnly(this.id);"
+                                                                    style="width:60px" class="form-control">
+                                                                <% }else{ %>
+                                                                    <input disabled id="third" value="<%= subject.thirdGrading %>" name="thirdGrading[]" type="text" min="0" max="100" maxlength="2"
+                                                                        oninput="numberOnly(this.id);" style="width:60px" class="form-control">
+                                                                    <% } %>
+                                                        </td>
+                                                        <td>
+                                                            <% if(subject.fourth == true || subject.fourth == "true"){ %>
+                                                                <input id="fourth" value="<%= subject.fourthGrading %>" name="fourthGrading[]" type="text" min="0" max="100" maxlength="2"
+                                                                    oninput="numberOnly(this.id);" style="width:60px" class="form-control">
+                                                                <% }else {%>
+                                                                    <input disabled id="fourth" value="<%= subject.fourthGrading %>" name="fourthGrading[]" type="text" min="0" max="100" maxlength="2"
+                                                                        oninput="numberOnly(this.id);" style="width:60px" class="form-control">
+                                                                    <% } %>
+                                                        </td>
+                                                        <td>
+                                                            <input disabled value="<%= (parseFloat(subject.firstGrading)  +  parseFloat(subject.secondGrading) +  parseFloat(subject.thirdGrading) + parseFloat(subject.fourthGrading)) / 4 %>"
+                                                                name="finalGrading[]" type="text" min="0" max="100" maxlength="2"
+                                                                oninput="numberOnly(this.id);" style="width:60px" class="form-control">
+                                                        </td>
+                                                        <td style="display: none">
+                                                            <input value="<%= (parseFloat(subject.firstGrading)  +  parseFloat(subject.secondGrading) +  parseFloat(subject.thirdGrading) + parseFloat(subject.fourthGrading)) / 4 %>"
+                                                                name="finalGrading[]" type="text" min="0" max="100" maxlength="2"
+                                                                oninput="numberOnly(this.id);" style="width:60px" class="form-control">
+                                                        </td>
+                                                        <% if (((parseFloat(subject.firstGrading)  +  parseFloat(subject.secondGrading) +  parseFloat(subject.thirdGrading) + parseFloat(subject.fourthGrading)) / 4) > 74.5) { %>
+                                                            <td>
+                                                                Passed!
+                                                                <!-- <input disabled id="remarks" value="Passed!" name="remarks[]" type="text" style="width:60px" class="form-control"> -->
+                                                            </td>
+                                                            <% } else if (((parseFloat(subject.firstGrading)  +  parseFloat(subject.secondGrading) +  parseFloat(subject.thirdGrading) + parseFloat(subject.fourthGrading)) / 4) < 74.5) { %>
+                                                                <td>
+                                                                    Failed!
+                                                                    <!-- <input disabled id="remarks" value="Failed!" name="remarks[]" type="text" style="width:60px" class="form-control"> -->
+                                                                </td>
+                                                                <% } else { %>
+                                                                    <td>
+                                                                        <!-- <input disabled id="remarks" value="" name="remarks[]" type="text" style="width:60px" class="form-control"> -->
+                                                                    </td>
+                                                                    <% } %>
+
+                                                    </tr>
+                                                    <% }); %>
+                                                        <% }else{ %>
+                                                            <% handle.forEach(function(subject){ %>
+                                                                <tr>
+                                                                    <input type="hidden" value="<%= subject._id %>" name="id[]" />
+                                                                    <td>
+                                                                        <%= subject.lastName %>,
+                                                                            <%= subject.firstName %>
+                                                                                <%= subject.middleName %>
+                                                                    </td>
+                                                                    <td>
+
+                                                                        <% if(subject.firstSemester == true || subject.firstSemester == "true"){ %>
+                                                                            <input id="firstSem" value="<%= subject.firstSem %>" name="firstSem[]" type="text" min="0" max="100" maxlength="2" style="width:60px"
+                                                                                class="form-control">
+                                                                            <% }else{ %>
+                                                                                <input disabled id="firstSem" value="<%= subject.firstSem %>" name="firstSem[]" type="text" min="0" max="100" maxlength="2"
+                                                                                    style="width:60px" class="form-control">
+                                                                                <% } %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <% if(subject.secondSemester == true || subject.secondSemester == "true"){ %>
+                                                                            <input id="secondSem" value="<%= subject.secondSem %>" name="secondSem[]" type="text" min="0" max="100" maxlength="2" style="width:60px"
+                                                                                class="form-control">
+                                                                            <% }else{ %>
+                                                                                <input disabled id="secondSem" value="<%= subject.secondSem %>" name="secondSem[]" type="text" min="0" max="100" maxlength="2"
+                                                                                    style="width:60px" class="form-control">
+                                                                                <% } %>
+                                                                    </td>
+                                                                </tr>
+                                                                <% }); %>
+                                                                    <% } %>
+                                                                        <div class="modal fade" id="encodeModal" role="dialog">
+                                                                            <div class="modal-dialog modal-sm" sty>
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                                        <div class="row">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div style="padding-top: 50px;">
+                                                                                            <div style="margin-top:-70px;">
+                                                                                                <br>
+                                                                                                <label style="color:black; font-weight:bold;">Password:</label>
+                                                                                                <input class="form-control" type="password" name="password" placeholder="PASSWORD">
+                                                                                                <br>
+
+                                                                                                <center>
+                                                                                                    <button id="pink" onClick=submitForms() "" class="btn btn-primary" style=" border-radius:5px;font-weight:bold; font-family:Verdana; width: 50%;">Confirm</button>
+                                                                                                </center>
+                                                                                            </div>
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="saveModal" role="dialog">
+                        <div class="modal-dialog modal-sm" sty>
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <div class="row">
+
+
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div style="padding-top: 50px;">
+                                        <div style="margin-top:-70px;">
+                                            <br>
+                                            <label style="color:black; font-weight:bold;">Password:</label>
+                                            <input class="form-control" type="password" name="password" placeholder="PASSWORD">
+                                            <br>
+
+                                            <center>
+                                                <button id="pink" onClick="saveForm()" class="btn btn-primary" style=" border-radius:5px;font-weight:bold; font-family:Verdana; width: 50%;">Confirm</button>
+                                            </center>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            </form>
+
+            </table>
+            <div style="margin-top:195px; margin-left:610px;">
+                <button id="encode" style="width: 100px;" class="btn btn-success" onClick="submitForms()">
+                    ENCODE</button>
+                <button style="width: 100px; margin-right:5px;" class="btn btn-success" onClick="saveForm()">
+                    SAVE</button>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            <script>
+                function submitForms() {
+                    $("#encodePost").submit();
+                }
+
+                function saveForm() {
+                    var toggle = document.getElementById("toggle");
+                    toggle.value = "true";
+                    console.log(toggle.value);
+                    $("#encodePost").submit();
+                }
+
+                function numberOnly(id) {
+                    // Get element by id which passed as parameter within HTML element event
+                    var element = document.getElementById(id);
+                    // User numbers only pattern, from 0 to 9
+                    var regex = /[^0-9]/gi;
+                    // This removes any other character but numbers as entered by user
+                    element.value = element.value.replace(regex, "");
+                }
+            </script>

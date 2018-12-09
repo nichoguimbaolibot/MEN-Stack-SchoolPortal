@@ -1,0 +1,98 @@
+<% if(message && message.length >0){ %>
+  <div class="alert alert-warning alert-dismissible" style="position: absolute;
+	top: 0px;
+	right: 1%;
+	height: 100px;
+	width: 400px;
+	z-index: 99;">
+    <button type="button" id="btn" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+
+    </button>
+    <%= message %>
+  </div>
+  <% } %>
+    <% layout("layout") -%>
+      <div class="col-sm-3" style=" padding: 10px; margin-top: 50px; " overflow-x: hidden;>
+        <div class="col-lg-12">
+          <% include ../partials/adminpanel %>
+        </div>
+      </div>
+      <div class="col-sm-6">
+
+        <div class="container">
+          <div class="panel panel-info  col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 80px; min-height:500px; ">
+            <div class="panel-heading" style="color: #ffffff;">
+
+              <a href="/manageaccount">Manage Account</a> >> User Account Details
+
+            </div>
+            <!-- <div class="panel-heading">
+          <h3>
+            <span style="color: #ffffff;">User Account Details</span>
+            <p style="color: #ffffff; font-size: 10px;">
+             
+          </h3>
+        </div> -->
+            <div style="padding: 5px;">
+              <h1>
+                <span>
+                  <%= user.profile.lastName %>,
+                    <%= user.profile.firstName %>
+                      <%= user.profile.middleName %>
+                </span>
+                <span style=" font-size: 20px; align:right ">
+                  <%= user.idNumber %>
+                </span>
+              </h1>
+              </br>
+              <h3>
+                <span>Account Type:
+                  <%= user.user %>
+                </span>
+              </h3>
+              <h3>
+                <span>Year and Section:
+                  <%= user.yrLvl %> -
+                    <%= user.section %>
+                </span>
+              </h3>
+              <h3>
+                <span>Gender:
+                  <%= user.gender %>
+                </span>
+              </h3>
+              <h3>
+                <span>Age:
+                  <%= user.age %>
+                </span>
+              </h3>
+              <h3>
+                <span>Birthday:
+                  <%= moment(user.birthdate).format("LL") %>
+                </span>
+              </h3>
+
+              <h3>
+                <span>Address:
+                  <%= user.address %>
+                </span>
+              </h3>
+
+              <h3>
+                <span>Contact:
+                  <%= user.contact %>
+                </span>
+              </h3>
+              <h3>
+                <span>
+                  <form action="/manageaccount/<%= user._id %>" method="POST">
+                    <button class="btn btn-info">DISABLE ACCOUNT</button>
+                  </form>
+                </span>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>

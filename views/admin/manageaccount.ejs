@@ -1,0 +1,123 @@
+<% if(message.length >0){ %>
+  <div class="alert alert-warning alert-dismissible" style="position: absolute;
+	top: 0px;
+	right: 1%;
+	height: 100px;
+	width: 400px;
+	z-index: 99;">
+    <button type="button" id="btn" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+
+    </button>
+    <%= message %>
+  </div>
+  <% } %>
+    <% layout("layout") -%>
+      <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+        <div class="col-lg-12">
+          <% include ../partials/adminpanel %>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="container">
+          <div class="panel panel-info  col-sm-9" id="myScrollspy" style="padding: 0px; margin-top: 80px; min-height:500px;">
+            <div class="panel-heading" style="color: #ffffff;">
+
+              Manage Accounts
+
+            </div>
+            <label for="usr" style="margin-left: 5px; margin-top: 15px;">Category:</label>
+            <div class="container">
+              <div class="dropdown" style="margin-top:5px; margin-left: -10px;">
+                <button style="border-radius: 5px;" class="dropdown-toggle" type="button" data-toggle="dropdown">--Please Select--
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <button class="btn btn-default form-control" onClick="postAdmin()">Admin</button>
+                    <form id="postFormAdmin" action="/manageaccount" method="GET">
+                      <input type="hidden" value="postAdmin" id="postAdmin" name="Admin" />
+                    </form>
+                  </li>
+                  <li>
+                    <button class="btn btn-default form-control" onClick="postFaculty()">Faculty</button>
+                    <form id="postFormFaculty" action="/manageaccount" method="GET">
+                      <input type="hidden" value="postFaculty" id="postFaculty" name="Faculty" />
+                    </form>
+                  </li>
+                  <li>
+                    <button class="btn btn-default form-control" onClick="postStudent()">Student</button>
+                    <form id="postFormStudent" action="/manageaccount" method="GET">
+                      <input type="hidden" value="postStudent" id="postStudent" name="Student" />
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <br>
+            <div class="table-responsive">
+              <div style="overflow-y: scroll; height:350px; ">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th style="color: #ffffff; background-color: #020531;">ID No:</th>
+                      <th style="color: #ffffff; background-color: #020531;">Name</th>
+                      <th style="color: #ffffff; background-color: #020531;">Type</th>
+                      <th style="color: #ffffff; background-color: #020531;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% users.forEach(function(user){ %>
+                      <tr>
+                        <td>
+                          <%= user.idNumber %>
+                        </td>
+                        <td>
+                          <%= user.profile.lastName %>,
+                            <%= user.profile.firstName %>
+                              <%= user.profile.middleName %>
+                        </td>
+                        <td>
+                          <%= user.user %>
+                        </td>
+                        <td>
+                          <a class="btn btn-info btn-sm" href="/manageaccount/<%= user._id %>">
+                            VIEW
+                          </a>
+                        </td>
+                      </tr>
+                      <% }); %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        function postAdmin() {
+          // alert("lol1")
+          var postAdmin = document.getElementById("postAdmin");
+          var postNumVal = (postAdmin.value = "postAdmin");
+          console.log(postNumVal);
+          $("#postFormAdmin").submit();
+        }
+
+        function postFaculty() {
+          // alert("lol2")
+          var postFaculty = document.getElementById("postFaculty");
+          var postNumVal = (postFaculty.value = "postFaculty");
+          console.log(postNumVal);
+          $("#postFormFaculty").submit();
+        }
+
+        function postStudent() {
+          // alert("lol3")
+          var postStudent = document.getElementById("postStudent");
+          var postNumVal = (postStudent.value = "postStudent");
+          console.log(postNumVal);
+          $("#postFormStudent").submit();
+        }
+      </script>

@@ -1,0 +1,139 @@
+<% if(errors && errors.length >0){ %>
+	<div class="alert alert-danger alert-dismissible" style= "position: absolute;
+	top: 0px;
+	right: 1%;
+	height: 100px;
+	width: 400px;
+	z-index: 99;">
+	  <button type="button" class="close" id="btn" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+  
+	  </button>
+   
+	  <br>
+	  <%= errors %>
+	</div>
+	<% } %>
+
+
+<% layout("layout") -%>
+
+  <!-- Inspired by https://codepen.io/transportedman/pen/NPWRGq -->
+
+<div class="carousel slide carousel-fade" data-ride="carousel">
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+        </div>
+        <div class="item">
+        </div>
+        <div class="item">
+        </div>
+    </div>
+</div>
+
+<!-- Remeber to put all the content you want on top of the slider below the slider code -->
+
+	<div class="row">
+		<div class="col-lg-6 cold-md-offset-3">
+		<div class="row">
+		<div class="col-md-3 col-sm-3"></div>
+		<div class="col-md-6 col-sm-6 text-center">
+	
+		</div>
+		</div>
+		<div class="container">
+		<div class="row">
+		<div class="col-md-4"></div>
+		<div style="margin-top:100px; box-shadow: none;border-radius: 10px;border:1px solid ;background-color: rgba(255, 255, 255,0.8);" class="col-md-4">
+		<form action="/signup" method="POST">
+		<h1 class="form-signin-heading text-muted">Sign Up</h1>
+			<div class="form-group">
+				<label for="name">First name:</label>
+				<input class="form-control" type="text" name="firstName" placeholder="first name">
+            </div>
+            <div class="form-group">
+				<label for="name">Middle name:</label>
+				<input class="form-control" type="text" name="middleName" placeholder="middle name">
+			</div>
+			<div class="form-group">
+				<label for="name">Last name:</label>
+				<input class="form-control" type="text" name="lastName" placeholder="last name">
+            </div>
+            <div class="form-group">
+				<label for="name">Age:</label>
+				<input class="form-control" type="number" min="0" name="age" placeholder="your age">
+			</div>
+			<label >Birthdate: </label>	
+			<div class="form-group">
+				<select class="btn btn-default" name="year" id="year">	
+				</select>
+				<select class="btn btn-default" name="month" id="month">
+					<option value="01">January</option>
+					<option value="02">February</option>
+					<option value="03">March</option>
+					<option value="04">April</option>
+					<option value="05">May</option>
+					<option value="06">June</option>
+					<option value="07">July</option>
+					<option value="08">August</option>
+					<option value="09">September</option>
+					<option value="10">October</option>
+					<option value="11">November</option>
+					<option value="12">December</option>
+				</select>
+				<select class="btn btn-default" name="day" id="day">
+					
+				</select>
+            </div>	
+            <div class="form-group">
+                <label for="contact">Contact No.</label>
+				<input class="form-control" type="number" min="0" name="contact" placeholder="Contact Number">                
+            </div>	
+			<div class="form-group">
+				<label for="name">Email:</label>
+				<input class="form-control" type="email" name="email" placeholder="email address">
+			</div>
+			<div class="form-group">
+			<label for="name">Password:</label>
+			<input class="form-control" type="password" name="password" placeholder="password">
+			</div>
+			<div class="form-group">
+				<label for="confirmPassword">Confirm Password: </label>
+				<input class="form-control" type="password" name="confirmPassword" placeholder="confirm password">
+			</div>
+			<div class="form-group">
+			<div class="text-center">
+			<button id="pink" class="btn btn-success form-control">SIGN UP</button>
+			</div>
+			</div>
+		</form>
+		</div>
+		</div>
+		</div>
+		</div>
+	</div>		
+	</div>
+	<script type="text/javascript">
+		for(var i = (new Date()).getFullYear(); i >= 1950; i--){
+			$("#year").append('<option value="' + i + '">'+ i + '</option>');
+		}
+		for(var i = 31; i >= 1; i--){
+			$("#day").append('<option value="' + i + '">'+ i + '</option>');
+		}
+
+
+		
+    var delay = 2000;
+  window.onload = function(){
+    setTimeout( myfunction, delay )
+    // document.getElementById("btn").click();
+
+  };
+  function myfunction() {
+    document.getElementById("btn").click();
+ }
+
+	</script>
+

@@ -1,0 +1,92 @@
+<% layout('layout') -%>
+  <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+    <div class="col-lg-12">
+      <% include ../partials/adminpanel %>
+    </div>
+  </div>
+
+  <div class="container">
+  <div class="row">
+  <div class="col-md-12">
+  <form action="/abc" method="POST">
+    <% subjects.forEach(function(subject){ %>
+      <input type="number" name="abc[]" value="<%= subject.firstGrading %>" />
+      <button>submit</button>
+  <% }); %>
+  </form>
+
+  <input onchange="changeValue();" type="number" id="try" />
+  <input type="number" id="xd" />
+  <script>
+  function changeValue(){
+  var x = document.getElementById("try").value;
+  document.getElementById("xd").value = x;
+  console.log(x);
+}
+  </script>
+  </div>
+  </div>
+  </div>
+<!-- <div class="container">
+<div class="row">
+<div class="col-md-12">
+<div id="reveal">
+<input type="checkbox" name="abc" value="12345" />
+  <input type="checkbox" name="abc" value="123456" />
+  <input type="checkbox" name="abc" value="123457" />
+  <input type="checkbox" name="abc" value="123458" />
+</div>
+<form hidden="true" id="first" action="/abc1" method ="POST">
+  <input type="checkbox" name="abc" value="12345" />
+  <input type="checkbox" name="abc" value="123456" />
+  <input type="checkbox" name="abc" value="123457" />
+  <input type="checkbox" name="abc" value="123458" />
+  </form>
+  <form hidden="true" id="second" action="/abc" method="POST">
+  <input type="checkbox" name="abc" value="12345" />
+  <input type="checkbox" name="abc" value="123456" />
+  <input type="checkbox" name="abc" value="123457" />
+  <input type="checkbox" name="abc" value="123458" />
+  <button>submit</button>
+  </form>  
+  </div>
+  <button id="edit" onclick="edited();">edit</button>
+  <button id="delete" onclick="deleted();">delete</button>
+  <button hidden="true" id="submitFormEdit" onclick="submitFormEdit()">submit</button>
+  <button id="cancelFormEdit" hidden="true" onclick="cancelFormEdit()">Cancel</button>
+  
+</div>
+</div>
+</div> -->
+<!-- <script type="text/javascript"> 
+// function edited(){
+//   $('#first').removeAttr('hidden');
+//   $('#reveal').attr('hidden', true);
+//   $('#edit').attr('hidden', true);
+//   $('#submitFormEdit').removeAttr('hidden');
+//   $('#cancelFormEdit').removeAttr('hidden');
+//   $('#delete').attr('hidden', true);
+// }
+
+// function submitFormEdit(){
+//   $("#first").submit();
+// }
+
+// function cancelFormEdit(){
+//   $("#reveal").removeAttr("hidden");
+//   $("#edit").removeAttr("hidden");
+//   $("#submitFormEdit").attr("hidden", true);
+//   $("#cancelFormEdit").attr("hidden", true);
+//   $("#delete").removeAttr("hidden");
+//   $("#first").attr("hidden", true);
+// }
+
+// function deleted(){
+
+// }
+
+ </script>
+<script>
+
+</script> -->
+

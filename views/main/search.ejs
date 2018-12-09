@@ -1,0 +1,74 @@
+
+  <% layout("layout") -%>
+
+  <div class="col-sm-12">
+    <div class="container">
+      <div class="panel panel-info" id="myScrollspy" style="padding: 0px; margin-top: 78px;">
+        <div class="panel-heading" style="color: #ffffff;">Search</div>
+  
+          <br>
+          <div class="table-responsive">
+            <div style="overflow-y: scroll; height:350px; ">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th style="color: #ffffff; background-color: #020531;">Title</th>
+                    <th style="color: #ffffff; background-color: #020531;">Content</th>
+                    <th style="color: #ffffff; background-color: #020531;">Action</th>
+                    <th style="color: #ffffff; background-color: #020531;">Date Submitted</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <% allNews.forEach(function(news){ %>
+                  <tr>
+                    <td><%= news.title %></td>
+                    <% if(news.content) {%>
+                    <td><%- ((news.content).substring(0, 24) + "...") %></td>
+                    <% } else{ %>
+                    <td>No content....</td>
+                    <% } %>
+                    <td><%= moment(news.publishDate).toString("MM-DD-YY") %></td>
+                    <td>
+                <a data-toggle="modal" data-target="#<%= news._id %>" style="color: #020531"><i class="fa fa-eye"></i></a>
+              </td>
+              <div class="modal fade" id="<%= news._id %>" role="dialog">
+      <div class="modal-dialog modal-m">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"><%= news.title %></h4>
+            <label><%= moment(news.publishDate).format("LL") %></label>
+          </div>
+          <div class="modal-body">
+            
+            <br>
+            <div style="overflow-y: scroll; height: 250px;">
+              <label> <%- news.content %>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+                    </td>
+                  </tr>
+                  <% }); %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          
+    <script>
+        var delay = 2000;
+      window.onload = function(){
+        setTimeout( myfunction, delay )
+        // document.getElementById("btn").click();
+    
+      };
+      function myfunction() {
+        document.getElementById("btn").click();
+     }
+    </script>

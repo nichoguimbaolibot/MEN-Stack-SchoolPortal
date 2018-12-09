@@ -1,0 +1,145 @@
+<% if(errors.length >0){ %>
+  <div class="alert alert-danger alert-dismissible" style="position: absolute;
+  top: 0px;
+  right: 1%;
+  height: 100px;
+  width: 400px;
+  z-index: 99;">
+    <button type="button" class="close" id="btn" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+
+    </button>
+    <%= errors %>
+  </div>
+  <% } %>
+
+
+
+    <% layout("layout") -%>
+      <% if(user.user === "admin"){ %>
+        <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+          <div class="col-lg-12">
+            <% include ../partials/adminpanel %>
+              <% } else if(user.user === "faculty"){ %>
+                <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+                  <div class="col-lg-12">
+                    <% include ../partials/facultypanel %>
+                      <% }else if(user.user === "student"){ %>
+                        <div class="col-sm-3" style=" padding: 10px; margin-top:70px;" overflow-x: hidden;>
+                          <div class="col-lg-12">
+                            <% include ../partials/studentpanel %>
+                              <% } %>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="container">
+                            <div class="panel panel-info col-sm-9" style="padding: 0px; margin-top: 80px;" overflow-x: hidden;>
+                              <div class="panel-heading" style="color: #ffffff;">
+
+                                Account Settings
+                                <%= user.idNumber %>
+
+                              </div>
+                              <div class="row">
+                                <div class="col-lg-6 cold-md-offset-3">
+                                  <div class="row">
+                                    <div class="col-md-3 col-sm-3"></div>
+                                    <div class="col-md-6 col-sm-6 text-center">
+                                    </div>
+                                  </div>
+                                  <div class="container">
+                                    <div class="row">
+                                      <div class="col-md-8 " style="margin-top: 20px;">
+
+                                        <!-- <div class="form-group">
+                    <label for="name">ID No:</label>
+                    <select id="userNumber" class="form-control" name="idNum">
+                      <option>
+
+                      </option>
+                    </select>
+                  </div> -->
+                                        <form action="/edit-profile" method="POST">
+                                          <center>
+                                            <% if(message.length >0){ %>
+                                              <div class="alert alert-success alert-dismissible">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+
+                                                </button>
+                                                <%= message %>
+                                              </div>
+                                              <% } %>
+
+
+
+                                                <div class="form-group">
+                                                  <div class="form-group">
+                                                    <label for="name">Email:</label>
+                                                    <input onkeypress="change()" style="text-align: center" class="form-control" value="<%= user.email %>" type="email" name="email"
+                                                      placeholder="current email">
+                                                  </div>
+                                                  <label for="name">Address:</label>
+                                                  <input onkeypress="change()" value="<%= user.address %>" style="text-align: center" class="form-control" type="text" name="address"
+                                                    placeholder="Address">
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="name">Old Password:</label>
+                                                  <input onkeypress="change()" class="form-control" type="password" name="currentPass" style="text-align: center" placeholder="current password">
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="name">Password:</label>
+                                                  <input onkeypress="change()" class="form-control" type="password" name="password" placeholder="new password" style="text-align: center">
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="confirmPassword">Confirm Password: </label>
+                                                  <input onkeypress="change()" class="form-control" type="password" name="confirmPass" placeholder="confirm new password" style="text-align: center">
+                                                </div>
+
+                                                <div class="form-group">
+                                                  <label for="pwd">Contact Number:</label>
+                                                  <input onkeypress="change()" value="<%= user.contact %>" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                    style="text-align: center" type="number" maxlength="11" class="form-control"
+                                                    name="contact" id="contact" placeholder="09XXXXXXXX">
+                                                </div>
+                                          </center>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group" style="width:86%; margin-left:5%;">
+                                <div class="text-center">
+                                  <button disabled id="update" class="btn btn-success form-control" style="height:4%;font-weight:bold; color:black">Update</button>
+                                </div>
+                                </form>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+                  <script type="text/javascript">
+                    function change() {
+                      document.getElementById("update").disabled = false;
+                    }
+                    // $("#prov").on("change", function(){
+
+                    // });
+                    for (var i = (new Date()).getFullYear(); i >= 1900; i--) {
+                      $("#year").append('<option value="' + i + '">' + i + '</option>');
+                    }
+                    for (var i = 31; i >= 1; i--) {
+                      $("#day").append('<option value="' + i + '">' + i + '</option>');
+                    }
+                    var delay = 2000;
+                    window.onload = function () {
+                      setTimeout(myfunction, delay)
+                      // document.getElementById("btn").click();
+
+                    };
+
+                    function myfunction() {
+                      document.getElementById("btn").click();
+                    }
+                  </script>

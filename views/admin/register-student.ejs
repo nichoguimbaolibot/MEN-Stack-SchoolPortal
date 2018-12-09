@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Center the loader */
+
+    #loader {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: 150px;
+      height: 150px;
+      margin: -75px 0 0 -75px;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      width: 120px;
+      height: 120px;
+
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Add animation to "page content" */
+
+    .animate-bottom {
+      position: relative;
+      -webkit-animation-name: animatebottom;
+      -webkit-animation-duration: 1s;
+      animation-name: animatebottom;
+      animation-duration: 1s
+    }
+
+    @-webkit-keyframes animatebottom {
+      from {
+        bottom: -100px;
+        opacity: 0
+      }
+      to {
+        bottom: 0px;
+        opacity: 1
+      }
+    }
+
+    @keyframes animatebottom {
+      from {
+        bottom: -100px;
+        opacity: 0
+      }
+      to {
+        bottom: 0;
+        opacity: 1
+      }
+    }
+
+    #myDiv {
+      display: none;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body onload="myFunction()" style="background-color:black">
+
+  <!-- <div id="loader"></div> -->
+
+
+  </div>
+</body>
+<script>
+  var myVar;
+
+  function myFunction() {
+    myVar = setTimeout(showPage, 3000);
+  }
+
+  function showPage() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
+  }
+</script>
+
+</body>
+
+</html>
+<% if(message && message.length >0){ %>
+  <div class="alert alert-warning alert-dismissible" style="position: absolute;
+	top: 0px;
+	right: 1%;
+	height: 100px;
+	width: 400px;
+	z-index: 99;">
+    <button type="button" id="btn" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+
+    </button>
+    <%= message %>
+  </div>
+  <% } %>
+    <% layout("layout") -%>
+      <div class="col-sm-3" style=" padding: 10px; margin-top: 50px;" overflow-x: hidden;>
+        <div class="col-lg-12">
+          <% include ../partials/adminpanel %>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="container">
+          <div class="panel panel-info col-sm-9" style="padding: 0px; margin-top: 80px; min-height:500px;" overflow-x: hidden;>
+            <div class="panel-heading" style="color: #ffffff;">
+
+              Create Student Account
+
+            </div>
+            <div class="row">
+              <div class="col-lg-6 cold-md-offset-3">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3"></div>
+                  <div class="col-md-6 col-sm-6 text-center">
+                    <% if(errors.length >0){ %>
+                      <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+
+                        </button>
+                        <%= errors %>
+                      </div>
+                      <% } %>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <form action="/manage/<%= pending._id %>" method="POST">
+                      <div class="col-md-4 " style="margin-top: 20px;">
+                        <div class="form-group ">
+                          <label for="admin">User Privileges:
+                            <select onchange="getUsers()" id="users" name="user" class="form-control">
+                              <option value="student">Student</option>
+                            </select>
+                          </label>
+                        </div>
+                        <div class="form-group">
+                          <label for="name">ID No:</label>
+                          <select id="userNumber" class="form-control" name="idNum">
+                            <% if (pending.studentNo !== null) { %>
+                              <option value="<%= studentCount %>">
+                                <%= pending.studentNo %>
+                              </option>
+                              <% } else { %>
+                                <option value="<%= studentCount %>">
+                                  <%= studentCount %>
+                                </option>
+                                <% } %>
+
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="name">First name:</label>
+                          <input style="text-transform: capitalize;" value="<%= pending.firstName %>" class="form-control" type="text" name="firstName"
+                            placeholder="first name">
+                        </div>
+                        <div class="form-group">
+                          <label for="name">Middle name:</label>
+                          <input style="text-transform: capitalize;" value="<%= pending.middleName %>" class="form-control" type="text" name="middleName"
+                            placeholder="middle name">
+                        </div>
+                        <div class="form-group">
+                          <label for="name">Last name:</label>
+                          <input style="text-transform: capitalize;" value="<%= pending.lastName %>" class="form-control" type="text" name="lastName"
+                            placeholder="last name">
+                        </div>
+
+
+                        <label>Birthdate: </label>
+                        <div class="form-group">
+                          <select class="btn btn-default" name="year" id="year">
+
+                          </select>
+                          <select class="btn btn-default" name="month" id="month">
+                            <option value="01">January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                          </select>
+                          <select class="btn btn-default" name="day" id="day">
+
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="name">Age:</label>
+                          <input value="<%= pending.age %>" class="form-control" type="number" min="0" name="age" placeholder="your age">
+                        </div>
+
+
+                      </div>
+                      <div class="col-md-4">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+
+                        <div class="form-group" style="margin-top:12px">
+                          <label for="name">Address:</label>
+                          <input value="<%= pending.address %>" class="form-control" type="text" name="address" placeholder="address">
+                        </div>
+                        <div class="form-group">
+                          <label for="name">Email:</label>
+                          <input value="<%= pending.email %>" class="form-control" type="email" name="email" placeholder="email address">
+                        </div>
+                        <div class="form-group">
+                          <label for="name">Password:</label>
+                          <input class="form-control" value="123" type="password" name="password" placeholder="password">
+                        </div>
+                        <div class="form-group">
+                          <label for="confirmPassword">Confirm Password: </label>
+                          <input class="form-control" type="password" value="123" name="confirmPassword" placeholder="confirm password">
+                        </div>
+
+                        <div class="form-group" style="margin-top:44px">
+                          <label for="">Gender:</label>
+                          <label class="radio-inline" style="margin-left: 1%;">
+                            <% if (pending.gender === "female") {%>
+                              <input type="radio" id="gender" name="gender" value="female" checked>Female
+                              <% } else { %>
+                                <input type="radio" id="gender" name="gender" value="female">Female
+                                <% }  %>
+                          </label>
+
+                          <label class="radio-inline" style="margin-left: 2%;">
+                            <% if(pending.gender === "male") {%>
+                              <input type="radio" id="gender" name="gender" checked value="male">Male
+                              <% } else { %>
+                                <input type="radio" id="gender" name="gender" value="male">Male
+                                <% }  %>
+                          </label>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="pwd">Contact Number:</label>
+                          <input value="<%= pending.contact %>" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                            type="number" maxlength="11" class="form-control" name="contact" id="contact">
+                        </div>
+                        <div class="form-group">
+                          <div class="text-center">
+                            <button class="btn btn-success form-control" id="btn">Submit</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="tableFaculty" style="display:none; text-align:center;" class="col-md-12">
+                        <table border="1" cellspacing="2" cellpadding="2">
+                          <thead>
+                            <th>Subject</th>
+                            <th>Year Level</th>
+                            <th>Section</th>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <input type="text" name="subject" />
+                              </td>
+                              <td>
+                                <input type="text" name="yearLevel" />
+                              </td>
+                              <td>
+                                <input type="text" name="facultySection" />
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <!-- <%= pending.birthdate.getMo %> -->
+      <script type="text/javascript">
+        for (var i = (new Date).getFullYear(); i >= 1905; i--) {
+          $("#year").append('<option value="' + i + '">' + i + '</option>');
+          // alert("<%= pending.birthdate.getDay() %>")
+
+
+          var month = parseInt("<%= pending.birthdate.getMonth() %>") + 1
+
+          if ("<%= pending.birthdate.getMonth() %>" >= 10) {
+            document.getElementById("month").value = parseInt("<%= pending.birthdate.getMonth() %>") + 1;
+
+          } else {
+            document.getElementById("month").value = "0" +
+              month;
+          }
+          document.getElementById("year").value = "<%= pending.birthdate.getFullYear() %>";
+
+
+
+          // alert("")
+        }
+        for (var i = 31; i >= 1; i--) {
+          $("#day").append('<option value="' + i + '">' + i + '</option>');
+
+          document.getElementById("day").value = "<%= pending.birthdate.getDay() %>";
+        }
+
+        function getUsers() {
+          var users = document.getElementById("users").value;
+
+          // document.getElementById("tableFaculty").style.display = "none";
+          var numUsers = document.getElementById("userNumber").value = "<%= studentCount %>";
+          console.log(numUsers);
+
+        }
+
+
+        function removeElement() {
+
+
+        }
+
+        function changeVisibility() {
+          document.getElementById("imgbox2").style.visibility = "hidden";
+        }
+
+        function resetElement() {
+          var users = document.getElementById("users").value;
+          if (users === "faculty") {
+            // document.getElementById("tableFaculty").style.display = "block";
+            // document.getElementById("imgbox2").style.visibility = "visible";
+          }
+        }
+        // window.onload = function () {
+        //   document.getElementById("btn").click();
+        // };
+      </script>
